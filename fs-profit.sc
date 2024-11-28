@@ -1,4 +1,4 @@
-#!/usr/bin/env amm
+#!/usr/bin/env -S amm s3
 /*
 min SCALA_VERSION=2.13
 	generates 3 files:
@@ -47,13 +47,14 @@ var logEachObject = false
 
 @main
 def run(@arg(short = 'g', doc = "path of the game data folder")
-		  gamePath: String = "D:/Game/FS.22/data",
+		  gamePath: String = "D:/Game/FS.22",
 		  @arg(short = 'v', doc = "Log extra information during processing")
 		  verbose: Flag) = {
+	val dataPath = os.Path(gamePath) / "data"
 	logEachObject = verbose.value
-	printOut(FillTypes, os.Path(gamePath) / "maps", "price.csv")
-	printOut(FruitTypes, os.Path(gamePath) / "maps", "fruits.csv")
-	printOut(Productions, os.Path(gamePath) / "placeables", "prods.csv")
+	printOut(FillTypes, dataPath / "maps", "price.csv")
+	printOut(FruitTypes, dataPath / "maps", "fruits.csv")
+	printOut(Productions, dataPath / "placeables", "prods.csv")
 }
 
 def printOut(xtractor: Extractor, p: os.Path, fileName: String): Unit = {
@@ -68,7 +69,7 @@ def printOut(xtractor: Extractor, p: os.Path, fileName: String): Unit = {
 
 import scala.xml.Node
 import xs4s.{XMLStream, XmlElementExtractor}
-import xs4s.XmlElementExtractor._
+import xs4s.XmlElementExtractor.captureWithPartialFunctionOfElementNames
 import xs4s.syntax.core._
 
 import java.io.InputStream
@@ -100,7 +101,7 @@ object Productions extends Extractor {
 		def toCsv(seg: Option[Segment]): String = seg.fold(ph)(_.toCsv)
 	}
 
-	case class Amount( fillType: String, amount: Decimal)
+	case class Amount( fillType: String, amount: Decimal, var store: Int = 0)
 		extends Segment(Amount) {
 		def this(e: Node) = this(
 			(e \@ "fillType").toLowerCase,
@@ -112,11 +113,11 @@ object Productions extends Extractor {
 			_value = round( cycles * amount * price(fillType))
 			_value
 		}
-		def toCsv = str(fillType, amount, _value, "")
+		def toCsv = str(fillType, amount, store+"", _value,"")
 	}
 
 	object Amount extends CSV {
-		val ph = ",,,"
+		val ph = ",,,,"
 	}
 
 	case class Profit(var cost: Decimal = 0, var income: Decimal = 0)
@@ -149,15 +150,6 @@ object Productions extends Extractor {
 		inputs: Seq[Amount],
 		outputs: Seq[Amount]		
 	) {
-		def this(e: Node) = this(
-			e\@"id",
-			e\@"name",
-			e\@"params",
-			Decimal(e\@"cyclesPerHour"),
-			Decimal(e\@"costsPerActiveHour"),
-			(e\"inputs"\"_").map(n => new Amount(n)),
-			(e\"outputs"\"_").map(n => new Amount(n))
-		)
 		lazy val cyclesPerDay = cyclesPerHour * hourPerDay
 		lazy val costPerDay = costsPerActiveHour * hourPerDay
 		lazy val profit = Profit(
@@ -189,7 +181,7 @@ object Productions extends Extractor {
 		 price: Decimal,
 		 productions: ArrayBuffer[Production] = ArrayBuffer.empty
 	) extends Named {
-		//override def toCsvRow(i: Int) = productions.foldLeft(new StringBuilder){ (sb,p) =>
+
 		def toCsv(data: Boolean) = if(data) 
 												str(name.split("_").last, price,"")
 											else nl + ",,"
@@ -208,17 +200,35 @@ object Productions extends Extractor {
 		}
 	}
 
-	// Unused dummy 4 Extractor trait
-	def xtractor(p: os.Path) = captureWithPartialFunctionOfElementNames {
-		case Vector("production") =>
-			(e: Elem) => ProductionPoint(null,"", 0)
-	}
+	var last: ProductionPoint = null
 
-	val xextractor = captureWithPartialFunctionOfElementNames {
-		case Vector("placeable", "storeData") =>
-			(e: Elem) => e
-		case Vector("placeable", "productionPoint", "productions", "production") =>
-			(e: Elem) => e
+	def updateCapacity(fillType: String, capacity: Int, s: Seq[Amount]*) = 
+		s.foreach(_.foreach(a => if(a.fillType == fillType) a.store = capacity))
+	
+	def xtractor(path: os.Path) = captureWithPartialFunctionOfElementNames {
+		case Vector("placeable", "storeData") => withErrorLog(path) { 
+			(e: Elem) => 
+				last = ProductionPoint(path, (e\"name").text, Decimal((e\"price").text))
+				last
+		}
+		case Vector("placeable", "productionPoint", "productions", "production") => withErrorLog(path) {
+			(e: Elem) => 
+				last.productions += new Production(e\@"id",
+																e\@"name",
+																e\@"params",
+																Decimal(e\@"cyclesPerHour"),
+																Decimal(e\@"costsPerActiveHour"),
+																(e\"inputs"\"_").map(new Amount(_)),
+																(e\"outputs"\"_").map(new Amount(_)))
+				null
+		}
+		case Vector("placeable", "productionPoint", "storage", "capacity") =>  withErrorLog(path) {
+			(e: Elem) => 
+				last.productions.foreach(p => updateCapacity((e \@ "fillType").toLowerCase,
+																			(e \@ "capacity").toInt,
+																			p.inputs, p.outputs))
+				null
+		}
 	}
 
 	type T = ProductionPoint
@@ -230,14 +240,14 @@ object Productions extends Extractor {
 			.filter(p => p.ext == "xml"
 					&& os.read.lines
 						.stream(p)
-						.take(2).find(_.contains(" type=\"productionPoint")).isDefined
+						.take(2).find( l => l.contains(" type=\"productionPoint") || l.contains(" type=\"greenhouse\"")).isDefined
 			)
 			.foldLeft(Seq.empty[ProductionPoint]) ((lst, p) => {
 				println("Reading ProductionPoints from " + p)
-				var pp: ProductionPoint = null
+				//var pp: ProductionPoint = null
 				os.read.stream(p).readBytesThrough { is =>
-					extract(is, xextractor)
-						.filter(e => if (e.label == "storeData") { // Get the pp on the fly
+					last = extract(is, xtractor(p)).toSeq.head
+/*						.filter(e => if (e.label == "storeData") { // Get the pp on the fly
 							pp = ProductionPoint(p, (e\"name").text, Decimal((e\"price").text))
 							false
 						} else true
@@ -248,14 +258,15 @@ object Productions extends Extractor {
 								case t: Throwable => throw new Exception(s"Error parsing $n in " + p, t)
 							}
 						}
+					*/
 				}
 				// Skip duplicates
-				lst.find(e => e.name == pp.name && e.productions == pp.productions).fold{
-					pp.printShort()
-					lst :+ pp
+				lst.find(e => e.name == last.name && e.productions == last.productions).fold {
+					last.printShort()
+					lst :+ last
 				}{ _ =>
 					print("Duplicate production point found:")
-					pp.printShort(true)
+					last.printShort(true)
 					lst
 				}
 			})
@@ -323,13 +334,14 @@ object FillTypes extends Extractor {
 		override def toCsv = str(name, price * 1000, showOnPriceTable)
 	}
 	override val _filteredNames = Seq("horse_","cow_","sheep_","pig_","chicken","weed","snow",
-		"roadsalt","air","tarp","squarebale","roundbale","meadow","water")
+												 "roadsalt","air","tarp","squarebale","roundbale","meadow")//,"water"
 
 	def xtractor(p: os.Path) = captureWithPartialFunctionOfElementNames {
 		case Vector("map", "fillTypes", "fillType") => withErrorLog(p) {
 			(e: Elem) =>
+				val pricePerLiter = e\"economy"\@"pricePerLiter"
 				FillType((e\@"name").toLowerCase,
-					Decimal(e\"economy"\@"pricePerLiter"),
+						Decimal(if(pricePerLiter.isBlank) "0" else pricePerLiter),
 						  e\@"showOnPriceTable")
 		}
 	}
