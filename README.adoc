@@ -1,0 +1,46 @@
+:hardbreaks:
+= Farming simulator data extractor
+
+Extracts fruit + fill type prices into `fruits.csv` and `prices.csv`, productions into prods.csv and
+"tractors into tractors.csv from the game install folder specified by the first (p) parameter.
+
+=== prices.csv
+name::
+price:: per m3
+showOnPriceTable:: Price visible in the game
+
+=== fruits.csv
+name::
+seedUsage:: required seed m3 / ha
+harvest:: harvested m3 / ha
+windrow:: straw m3 / ha
+income:: per ha
+
+=== prods.csv
+name::
+prod chain name::
+production cycle / day::
+running cost / day::
+input::
+amount / cycle::
+input cost / day::
+total monthly cost::
+output::
+amount / cycle::
+income / day::
+
+=== tractors.csv
+brand::
+series::
+name:: of engine variant
+hp::
+price:: total price of the engine variant
+maxSpeed:: mk / h
+cat:: category S / L / M
+extras:: Extra information like :
+
+|===
+| track | track variant available
+| front loader |
+| articulating |
+|===
