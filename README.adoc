@@ -1,8 +1,14 @@
 :hardbreaks:
 = Farming simulator data extractor
 
-Extracts fruit + fill type prices into `fruits.csv` and `prices.csv`, productions into prods.csv and
-"tractors into tractors.csv from the game install folder specified by the first (p) parameter.
+Extracts fruit and fill type prices into `fruits.csv` and `prices.csv`, productions into `prods.csv` and
+"tractors into `tractors.csv` from the game install folder specified by the first (p) parameter.
+
+== ERROR
+*`fruitTypes` file structure changed, the generation does not work!!*
+
+Run::
+`mill run {params}`
 
 === prices.csv
 name::
@@ -16,9 +22,8 @@ harvest:: harvested m3 / ha
 windrow:: straw m3 / ha
 income:: per ha
 
-=== prods.csv
+=== productions.csv
 name::
-prod chain name::
 production cycle / day::
 running cost / day::
 input::
@@ -28,6 +33,8 @@ total monthly cost::
 output::
 amount / cycle::
 income / day::
+
+NOTE: does not reads map specific factories
 
 === tractors.csv
 brand::

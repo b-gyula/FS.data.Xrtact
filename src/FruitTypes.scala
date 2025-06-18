@@ -14,14 +14,14 @@ object FruitTypes extends Extractor {
 	case class FruitType(name: String, seedUsagePerSqm: Decimal, harvestLiterPerSqm: Decimal,
 								windrowLitersPerSqm: Decimal, var chafFactor: Decimal = 0) extends Named {
 		override 
-		def toCsv = str(name, seedUsagePerSqm * 10, harvestLiterPerSqm * 10,	windrowLitersPerSqm * 10,
+		def toCsv = cell(name, seedUsagePerSqm * 10, harvestLiterPerSqm * 10,	windrowLitersPerSqm * 10,
 			round(FillTypes.price( name) * harvestLiterPerSqm * 10000) // fruit income per ha
 			, chafFactor
 		)
 	}
 
 	override
-	val headers = "name,seedUsage,harvest,windrow"
+	val headers = cell("name","seedUsage","harvest","windrow")
 	
 	case class Converter(from: String, to: String, factor: Decimal)
 

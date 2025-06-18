@@ -13,10 +13,10 @@ import scala.xml.Elem
 object FillTypes extends Extractor {
 	type T = FillType
 	override
-	val headers = "name,price,showOnPriceTable"
+	val headers = cell("name","price","showOnPriceTable")
 
 	case class FillType(name: String, price: Decimal, showOnPriceTable: Boolean) extends Named {
-		override def toCsv = str(name, price * 1000, showOnPriceTable)
+		override def toCsv = cell(name, price * 1000, showOnPriceTable)
 	}
 	
 	override 

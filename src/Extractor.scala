@@ -1,6 +1,5 @@
-import FSXtract.logEachObject
 import xs4s.{XMLStream, XmlElementExtractor}
-
+import FSXtract.cellSeparator
 import java.io.InputStream
 import scala.math.BigDecimal as Decimal
 import scala.math.BigDecimal.RoundingMode.HALF_DOWN
@@ -79,7 +78,8 @@ trait Extractor {
 
 	def round(b: Decimal, scale: Int = 0) = b.setScale(scale, HALF_DOWN)
 
-	def str(s: String*) = s.mkString(",")
+	def cell(s: String*) = s.mkString(cellSeparator)
+	def emptyCells(i: Int) = cellSeparator * i
 
 	def extract[T](is: InputStream, x: XmlElementExtractor[T]): Iterator[T] = XMLStream
 		.fromInputStream(is)

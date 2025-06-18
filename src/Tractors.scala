@@ -15,7 +15,7 @@ object Tractors extends Extractor {
 	/** Return each tractor with only the first engine variant*/
 	var firstEngineOnly = false
 	case class Engine(name: String, hp:Int, price: Int) {
-		def toCsv: String = str(name, hp.toString, price.toString)
+		def toCsv: String = cell(name, hp.toString, price.toString)
 	}
 
 	case class Tractor(brand: String,
@@ -35,10 +35,10 @@ object Tractors extends Extractor {
 		).result
 
 		override
-		def toCsv: String = str(brand, series, "%s", maxSpeed.toString, cat, extra.mkString("\"",", ","\""))
+		def toCsv: String = cell(brand, series, "%s", maxSpeed.toString, cat, extra.mkString("\"",", ","\""))
 	}
 	override
-	val headers = "brand,series,name,hp,price,maxSpeed,cat,extras"
+	val headers = cell("brand","series","name","hp","price","maxSpeed","cat","extras")
 
 	override
 	def collect(path: os.Path): Seq[Tractor] = {

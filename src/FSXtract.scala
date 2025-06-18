@@ -5,7 +5,7 @@ import pprint.pprintln
 
 object FSXtract {
 	var logEachObject = false
-
+	var cellSeparator = ";"
 	@main(doc="Extracts fruit + fill type prices into fruits.csv and price.csv, productions into prods.csv and " +
 		"tractors into tractors.csv from the game install folder specified by the first (p) parameter.\n" +
 		"Individual types can be defined by the second (x) parameter e.g -x t -> Extract tractors only\n" +
@@ -15,21 +15,26 @@ object FSXtract {
 				@arg(short = 'x', doc = "type of xtract: f - fruit prices, t - tractors, p - productions. t! will generate tractors with only the first engine variant")
 				xtract: String = "ftp",
 				@arg(short = 'v', doc = "Log extra information during processing")
-				verbose: Flag): Unit = {
+				verbose: Flag = Flag(false),
+			   @arg(short='s', doc = "separator")
+				separator: String = ";"): Unit = {
 		val directPath = gamePath.startsWith(":")
 		val dataPath = if(directPath) os.Path(gamePath.substring(1))
 										 else os.Path(gamePath) / "data"
 		logEachObject = verbose.value
+		cellSeparator = separator
 		if(xtract.contains('t')) {
 			Tractors.firstEngineOnly = xtract.contains("t!")
 			printOut(Tractors, if (directPath) dataPath else dataPath / "vehicles", "tractors.csv")
 		}
-		if(xtract.contains('f')) {
-			printOut(FillTypes, if(directPath) dataPath else dataPath / "maps", "prices.csv")
-			printOut(FruitTypes, if(directPath) dataPath else dataPath / "maps", "fruits.csv")
-		}
-		if(xtract.contains('p')) {
-			printOut(Productions, if (xtract == "p/") os.Path(gamePath) else dataPath / "placeables", "prods.csv")
+		if (xtract.contains('f') || xtract.contains('p')) {
+			printOut(FillTypes, if (directPath) dataPath else dataPath / "maps", "prices.csv")
+			if (xtract.contains('f')) {
+				printOut(FruitTypes, if (directPath) dataPath else dataPath / "maps", "fruits.csv")
+			}
+			if (xtract.contains('p')) {
+				printOut(Productions, if (xtract == "p/") os.Path(gamePath) else dataPath / "placeables", "productions.csv")
+			}
 		}
 	}
 
@@ -44,5 +49,6 @@ object FSXtract {
 		wr.close()
 	}
 
-	def main(args: Array[String]): Unit = ParserForMethods(this).runOrExit(args, true)
+	def main(args: Array[String]): Unit =
+		ParserForMethods(this).runOrExit(args, true)
 }

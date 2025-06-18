@@ -9,18 +9,28 @@ import pprint.pprintln
 /**
  prod.csv
 	 name:
-	 prod chain: name
 	 production cycle / day
 	 running cost / day
 	 input
 	 amount / cycle
+    storage
 	 input cost / day
 	 total monthlyCost
 	 output
 	 amount / cycle
+	 storage
 	 income / day
+    total income (of all prod chains) /day
+ 	 profit / day
+ 	 profit ratio / day
+ 	 total profit / day
+ 	 total profit ratio / day
  */
 object Productions extends Extractor {
+	import language.deprecated.symbolLiterals
+	val headers = cell("name","price","cycles/d","run costs/d","input","amount/c","storage","cost/d"
+		,"product","amount/c","storage","income/d",
+		"total income/d","profit/d","profit ratio/d","total profit/d","total profit ratio/d")
 	import FillTypes.price
 	import scala.Option.when
 	val hourPerDay = 24
@@ -49,11 +59,11 @@ object Productions extends Extractor {
 			_value
 		}
 		override 
-		def toCsv: String = str(fillType, amount, store+"", _value,"")
+		def toCsv: String = cell(fillType, amount, store+"", _value,"")
 	}
 
 	object Amount extends CSV {
-		val ph = ",,,,"
+		val ph = emptyCells(4)
 	}
 
 	case class Profit(var cost: Decimal = 0, var income: Decimal = 0)
@@ -64,11 +74,11 @@ object Productions extends Extractor {
 			this
 		}
 		def profit = income - cost
-		def toCsv = str(round(profit), round(profit/cost, 2))
+		def toCsv = cell(round(profit), round(profit/cost, 2))
 	}
 
 	object Profit extends CSV {
-		val ph = ","
+		val ph = emptyCells(1)
 	}
 	case class IncomeLog(p: Profit) extends Segment(Profit) {
 		def toCsv = p.income
@@ -95,12 +105,12 @@ object Productions extends Extractor {
 			import Amount._
 			for(i <- 0 until Math.max(inputs.size, outputs.size)) {
 				sb++= (if(i == 0)
-					str( cyclesPerDay, costPerDay, "")
+					cell( cyclesPerDay, costPerDay, "")
 				else
-					nl + ("," * (indent + 2)))
+					nl + emptyCells(indent + 2))
 				sb++= toCsv(when(i < inputs.size)( inputs(i)))
 				sb++= toCsv(when(i < outputs.size)(outputs(i)))
-				sb++= str(
+				sb++= cell(
 					IncomeLog.toCsv(totalProfit.map(IncomeLog(_)).flatMap(when(i == 0)(_))),
 					profit.toCsv(i == 0),
 					Profit.toCsv(totalProfit.flatMap(when(i == 0)(_)) ))
@@ -109,17 +119,15 @@ object Productions extends Extractor {
 		}
 	}
 
-	val headers="name,prod,cyclesPerHour,costsPerHour,input,amount,output,amount,sell"
-	case class ProductionPoint (
-											file: os.Path,
+	case class ProductionPoint (	file: os.Path,
 											name: String,
 											price: Decimal,
 											productions: ArrayBuffer[Production] = ArrayBuffer.empty
 										) extends Named {
 
 		def toCsv(data: Boolean): String = if(data)
-												str(name.split("_").last, price,"")
-											else nl + ",,"
+												cell(name.split("_").last, price,"")
+											else nl + emptyCells(2)
 
 		override def toCsv: String = {
 			val totalProfit = productions.foldLeft(Profit())((s,p) => s += p.profit)
