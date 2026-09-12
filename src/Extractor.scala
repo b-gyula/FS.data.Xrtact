@@ -6,19 +6,27 @@ import scala.math.BigDecimal.RoundingMode.HALF_DOWN
 import scala.xml.{Elem, NodeSeq}
 import xs4s.syntax.core.*
 
+trait Extractor(val fileName: String = ""
+					,val skipNames: Array[String] = Array()
+	) {
+	var directPath = false
+	var dataPath: os.Path = _
+	def _dataPath(gamePath:String) = {
+		directPath = gamePath.startsWith(":")
+		dataPath = if (directPath) os.Path(gamePath.substring(1))
+									 else os.Path(gamePath) / "data"
+	}
 
-trait Extractor {
 	trait Named {
 		def name: String
 		def toCsv: String
 		def toCsvRow: String = toCsv + nl
 	}
+
 	type T <: Named
 
 	def xtractor(p: os.Path): XmlElementExtractor[T]
 	def headers: String
-	def fileName: String
-	def _filteredNames: Array[String] = Array()
 
 	var actRow = 2
 
@@ -26,6 +34,7 @@ trait Extractor {
 		actRow += 1
 		"\n"
 	}
+
 	lazy val className = getClass.getSimpleName
 
 	def withErrorLog[A](p: os.Path) (f: Elem => A): Elem => A = { e =>
@@ -38,24 +47,31 @@ trait Extractor {
 			case t: Throwable => throw new Exception(s"Error parsing $className from: $e in $p" , t)
 		}
 	}
+
 	var all: Seq[T] = _
+
+	def apply(gamePath: String): Seq[T] = {
+		_dataPath (gamePath)
+		collect(if (directPath) dataPath else dataPath / "maps")
+	}
 
 	def collect(path: os.Path): Seq[T] = {
 		all = Seq.empty[T]
 		os.walk(path, { p => p.last.startsWith("map") && os.isDir(p)})
 			.find(_.last == fileName)
 			.map{ path =>
-				println (s"Reading $className from " + path)
-				if(_filteredNames.nonEmpty)
-					println ("Skipping:" + _filteredNames.mkString(","))
+				FSXtract.log(s"Reading $className from " + path)
+				if(skipNames.nonEmpty) {
+					FSXtract.log("Skipping:" + skipNames.mkString(","))
+				}
 				os.read.stream(path).readBytesThrough { is =>
 					extract(is, xtractor(path)).foreach {
-						case f: T if !_filteredNames.exists(f.name.startsWith(_))  =>
+						case f: T if !skipNames.exists(f.name.startsWith(_))  =>
 							all = all :+ f
 						case _ =>
 					}
 				}
-			}.getOrElse(throw new Exception(s"File $fileName not found in $path"))
+			}.getOrElse(throw new Exception(s"File '$fileName' not found in '$path'"))
 		all
 	}
 
@@ -71,6 +87,7 @@ trait Extractor {
 		val s = nodeSeqToStr(ns)
 		if(s.isEmpty) 0 else s.toInt
 	}
+
 	implicit def nodeSeqToDec(ns: NodeSeq): Decimal = Decimal(nodeSeqToStr(ns))
 
 	implicit def decimalToStr(b: Decimal): String = if (b == 0) ""

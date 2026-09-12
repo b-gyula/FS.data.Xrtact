@@ -1,11 +1,10 @@
-import FSXtract.logEachObject
 import xs4s.XmlElementExtractor.captureWithPartialFunctionOfElementNames
 import xs4s.syntax.core.*
 import math.BigDecimal as Decimal
 import scala.collection.mutable.ArrayBuffer
 import scala.xml.Elem
 import scala.xml.Node
-import pprint.pprintln
+
 /**
  prod.csv
 	 name:
@@ -139,9 +138,9 @@ object Productions extends Extractor {
 				}.result
 		}
 
-		def printShort(log: Boolean = logEachObject): Unit = if (log) {
-			println(name + ":")
-			productions.foreach( pprintln(_) )
+		def printShort(): Unit =  {
+			FSXtract.log(name + ":")
+			productions.foreach( pprint.log(_) )
 		}
 	}
 
@@ -177,7 +176,12 @@ object Productions extends Extractor {
 	}
 
 	type T = ProductionPoint
-	val fileName=""
+
+	override
+	def apply(gamePath: String): Seq[T] = {
+		_dataPath(gamePath)
+		collect(if (directPath) dataPath else dataPath / "placeables")
+	}
 
 	override
 	def collect(path: os.Path): Seq[ProductionPoint] = {
@@ -188,7 +192,7 @@ object Productions extends Extractor {
 				.take(2).find( l => l.contains(" type=\"productionPoint") || l.contains(" type=\"greenhouse\"")).isDefined
 			)
 			.foldLeft(Seq.empty[ProductionPoint]) ((lst, p) => {
-				println("Reading ProductionPoints from " + p)
+				FSXtract.log("Reading ProductionPoints from " + p)
 				//var pp: ProductionPoint = null
 				os.read.stream(p).readBytesThrough { is =>
 					last = extract(is, xtractor(p)).toSeq.head
@@ -207,11 +211,11 @@ object Productions extends Extractor {
 				}
 				// Skip duplicates
 				lst.find(e => e.name == last.name && e.productions == last.productions).fold {
-					last.printShort()
+					//last.printShort()
 					lst :+ last
 				}{ _ =>
-					print("Duplicate production point found:")
-					last.printShort(true)
+					FSXtract.log("Duplicate production point found:")
+					last.printShort()
 					lst
 				}
 			})

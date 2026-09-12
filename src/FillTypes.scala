@@ -10,7 +10,9 @@ import xs4s.syntax.core._
 import math.BigDecimal as Decimal
 import scala.xml.Elem
 
-object FillTypes extends Extractor {
+object FillTypes extends Extractor("maps_fillTypes.xml"
+		,Array("horse_","cow_","sheep_","pig_","chicken","weed","snow",
+				 "roadsalt","air","tarp","squarebale","roundbale","meadow")) {
 	type T = FillType
 	override
 	val headers = cell("name","price","showOnPriceTable")
@@ -18,10 +20,6 @@ object FillTypes extends Extractor {
 	case class FillType(name: String, price: Decimal, showOnPriceTable: Boolean) extends Named {
 		override def toCsv = cell(name, price * 1000, showOnPriceTable)
 	}
-	
-	override 
-	val _filteredNames = Array("horse_","cow_","sheep_","pig_","chicken","weed","snow",
-										"roadsalt","air","tarp","squarebale","roundbale","meadow")//,"water"
 
 	override
 	def xtractor(p: os.Path) = captureWithPartialFunctionOfElementNames {
@@ -33,8 +31,6 @@ object FillTypes extends Extractor {
 					e\@"showOnPriceTable")
 		}
 	}
-	override
-	val fileName = "maps_fillTypes.xml"
 
 	def price(name: String): Decimal = {
 		Option(all).flatMap( _.find(_.name == name).map(_.price) ).getOrElse {

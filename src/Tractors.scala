@@ -11,9 +11,10 @@ import scala.collection.mutable.Buffer
 
 object Tractors extends Extractor {
 	type T = Tractor
-	val fileName=""
+
 	/** Return each tractor with only the first engine variant*/
 	var firstEngineOnly = false
+
 	case class Engine(name: String, hp:Int, price: Int) {
 		def toCsv: String = cell(name, hp.toString, price.toString)
 	}
@@ -41,6 +42,12 @@ object Tractors extends Extractor {
 	val headers = cell("brand","series","name","hp","price","maxSpeed","cat","extras")
 
 	override
+	def apply(gamePath: String): Seq[T] = {
+		_dataPath(gamePath)
+		collect(if (directPath) dataPath else dataPath / "vehicles")
+	}
+
+	override
 	def collect(path: os.Path): Seq[Tractor] = {
 		os.walk(path)
 			.filter(p => if(!os.isDir(p) && p.ext == "xml") {
@@ -56,7 +63,7 @@ object Tractors extends Extractor {
 				} else false
 			} else false )
 			.foldLeft(Seq.empty[Tractor]) ((lst, f) => {
-				println("Reading Tractor from " + f)
+				FSXtract.log("Reading Tractor from " + f)
 				lst ++ os.read.stream(f).readBytesThrough { is =>
 					extract(is, xtractor(f)).filter(_!=null).toSeq
 				}
