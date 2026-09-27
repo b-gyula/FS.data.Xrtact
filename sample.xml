@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<fs>
+  <fruit>
+    <wheat seed="0.5" yield="8.9" windrow="38.6" />
+  </fruit>
+
+  <price
+    wheat="337"
+    oat="532"
+    electriccharge="-350"/>
+
+  <factory>
+    <sawmill price="300000">
+      <boards cycle="24" cost="48" profit="0.37">
+        <in wood='416'/>
+        <out boards="275" woodchips="120"/>
+      </boards>
+    </sawmill>
+  </factory>
+</fs>

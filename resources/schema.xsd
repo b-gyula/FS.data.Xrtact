@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:m="http://fstools.uk/XMLSchema"
+		  xmlns:v='http://www.w3.org/2007/XMLSchema-versioning'
+		  v:minVersion = "1.1"
+		  targetNamespace="http://fstools.uk/XMLSchema">
+	<simpleType name='positiveDouble'>
+		<restriction base='double'>
+			<minExclusive value='0'/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="crop">
+		<attribute name="seed" type="double">
+			<annotation>
+				<documentation>seed required m3/ha</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="yield" type="m:positiveDouble" use="required">
+			<annotation>
+				<documentation>yield  m3/ha</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="windrow" type="m:positiveDouble">
+			<annotation>
+				<documentation>generated m3/ha</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+
+	<complexType name="fruitSWithValues">
+		<anyAttribute processContents='lax'/>
+		<defaultAttributes type='integer' appliesToEmpty='true'/>
+	</complexType>
+
+	<complexType name="recipe">
+		<sequence>
+			<element name="in" type="m:fruitSWithValues">
+				<annotation>
+					<documentation>attributes with the material as name and value as the used liter per cycle</documentation>
+				</annotation>
+			</element>
+			<element name="out" type="m:fruitSWithValues">
+				<annotation>
+					<documentation>attributes with the crop/goods as name and value as the yield liter per cycle</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="cycle" type="positiveInteger" use="required">
+			<annotation>
+				<documentation>per day</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="cost" type="positiveInteger" use="required">
+			<annotation>
+				<documentation>per day</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="profit" type="decimal" use="required">
+			<annotation>
+				<documentation>ratio : profit / cost (inputs price + running cost / day)</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+
+	<complexType name="factory">
+		<sequence>
+			<any maxOccurs='unbounded' processContents='strict'>
+				<alternative test='true()' type='m:recipe'/>
+			</any>
+		</sequence>
+		<attribute name="price" type="positiveInteger" use="required"/>
+		<attribute name="variant" type="string"/>
+	</complexType>
+
+	<element name="fs">
+		<complexType>
+			<sequence>
+				<element name="crop">
+					<any maxOccurs="unbounded" processContents="strict">
+						<alternative test="true()" type="m:crop"/>
+					</any>
+				</element>
+				<element name="price" type="m:fruitSWithValues">
+					<annotation>
+						<documentation>attributes with the crop/goods as name and price per 1000 liter as value.
+							negative value mark a price that is not shown in the game's price table
+						</documentation>
+					</annotation>
+				</element>
+				<element name="factory">
+					<any maxOccurs='unbounded' processContents='strict'>
+						<alternative test='true()' type='m:factory'/>
+					</any>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

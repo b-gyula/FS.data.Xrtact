@@ -11,25 +11,17 @@ import scala.xml.Elem
 	 price: per m3
 	 showOnPriceTable:
  */
-object FruitTypes extends Extractor("maps_fruitTypes.xml"
-		,Array("meadow")) {
+object FruitTypes extends Extractor("maps_fruitTypes.xml", Array("meadow")) {
 	type T = FruitType
 
 	case class FruitType(name: String,
-								seedUsagePerSqm: Decimal,
-								harvestLiterPerSqm: Decimal,
-								windrowLitersPerSqm: Decimal,
+								/** liter/m2 * 10 == m3/ha */
+								seedM3PerHa: Decimal,
+								yieldM3PerHa: Decimal,
+								windrowM3PerHa: Decimal,
 								var chafFactor: Decimal = 0) extends Named {
-		override 
-		def toCsv = cell(name, seedUsagePerSqm * 10, harvestLiterPerSqm * 10, windrowLitersPerSqm * 10,
-			round(FillTypes.price( name) * harvestLiterPerSqm * 10000) // fruit income per ha
-			, chafFactor
-		)
 	}
 
-	override
-	val headers = cell("name","seedUsage","harvest","windrow")
-	
 	case class Converter(from: String, to: String, factor: Decimal)
 
 	override
@@ -49,10 +41,10 @@ object FruitTypes extends Extractor("maps_fruitTypes.xml"
 				}
 				else { // F22
 					FruitType((e \@ "name").toLowerCase,
-						Decimal(e \ "cultivation" \@ "seedUsagePerSqm"),
-						Decimal(e \ "harvest" \@ "literPerSqm"),
-						if ((e \ "windrow" \@ "name") == "straw")
-							Decimal(e \ "windrow" \@ "litersPerSqm")
+						Decimal(e \ "cultivation" \@ "seedUsagePerSqm") *10,
+						Decimal(e \ "harvest" \@ "literPerSqm") * 10,
+						if ((e \ "windrow" \@ "name") == "straw")  
+							Decimal(e \ "windrow" \@ "litersPerSqm")  *10
 						else 0
 					)
 				}
@@ -61,10 +53,10 @@ object FruitTypes extends Extractor("maps_fruitTypes.xml"
 		case Vector( "foliageType", "fruitType") => withErrorLog(p) {
 			(e: Elem) =>
 				FruitType((e \@ "name").toLowerCase,
-					Decimal(e \ "seeding" \@ "litersPerSqm"),
-					Decimal(e \ "harvest" \@ "litersPerSqm"),
+					Decimal(e \ "seeding" \@ "litersPerSqm")  *10,
+					Decimal(e \ "harvest" \@ "litersPerSqm")  *10,
 					if ((e \ "windrow" \@ "fillType") == "straw")
-						Decimal(e \ "windrow" \@ "litersPerSqm")
+						Decimal(e \ "windrow" \@ "litersPerSqm")  *10
 					else 0
 				)
 		}

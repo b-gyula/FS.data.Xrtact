@@ -1,9 +1,9 @@
 import xs4s.XmlElementExtractor.captureWithPartialFunctionOfElementNames
 import xs4s.syntax.core.*
+
 import math.BigDecimal as Decimal
 import scala.collection.mutable.ArrayBuffer
-import scala.xml.Elem
-import scala.xml.Node
+import scala.xml.{Elem, Node, XML}
 
 /**
  prod.csv
@@ -26,133 +26,84 @@ import scala.xml.Node
  	 total profit ratio / day
  */
 object Productions extends Extractor {
-	import language.deprecated.symbolLiterals
-	val headers = cell("name","price","cycles/d","run costs/d","input","amount/c","storage","cost/d"
-		,"product","amount/c","storage","income/d",
-		"total income/d","profit/d","profit ratio/d","total profit/d","total profit ratio/d")
 	import FillTypes.price
-	import scala.Option.when
 	val hourPerDay = 24
 
-	abstract class Segment(cvs: CSV) {
-		def toCsv: String
-
-		def toCsv(data: Boolean): String = if (data) toCsv else cvs.ph
-	}
-
-	trait CSV {
-		def ph: String
-		def toCsv(seg: Option[Segment]): String = seg.fold(ph)(_.toCsv)
-	}
-
-	case class Amount( fillType: String, amount: Decimal, var store: Int = 0)
-		extends Segment(Amount) {
+	case class Amount(name: String, amount: Decimal, var store: Int = 0) extends Named {
 		def this(e: Node) = this(
 			(e \@ "fillType").toLowerCase,
 			Decimal(e\@"amount")
 		)
-		var _value: Decimal = 0
 
-		def value(cycles: Decimal): Decimal = {
-			_value = round( cycles * amount * price(fillType))
-			_value
-		}
-		override 
-		def toCsv: String = cell(fillType, amount, store+"", _value,"")
+		/** worth of `cycles` runs; pure function instead of the old `_value` cache,
+			so callers state which cycle count they mean (always `cyclesPerDay` today) */
+		def value(cycles: Decimal): Decimal = round( cycles * amount * price(name))
 	}
 
-	object Amount extends CSV {
-		val ph = emptyCells(4)
-	}
-
-	case class Profit(var cost: Decimal = 0, var income: Decimal = 0)
-		extends Segment(Profit) {
+	case class Profit(var cost: Decimal = 0, var income: Decimal = 0) {
 		def +=(p: Profit): Profit = {
 			income = income + p.income
 			cost = cost + p.cost
 			this
 		}
 		def profit = income - cost
-		def toCsv = cell(round(profit), round(profit/cost, 2))
-	}
-
-	object Profit extends CSV {
-		val ph = emptyCells(1)
-	}
-	case class IncomeLog(p: Profit) extends Segment(Profit) {
-		def toCsv = p.income
-	}
-	object IncomeLog extends CSV {
-		val ph = ""
+		def ratio = round(profit/cost, 2)
 	}
 
 	case class Production( id: String,
-								name: String,
-								params: String,
-								cyclesPerHour: Decimal,
-								costsPerActiveHour: Decimal,
-								inputs: Seq[Amount],
-								outputs: Seq[Amount]
-							) {
+								  name: String,
+								  params: String,
+								  cyclesPerHour: Decimal,
+								  costsPerActiveHour: Decimal,
+								  inputs: Seq[Amount],
+								  outputs: Seq[Amount]
+								) {
+
 		lazy val cyclesPerDay = cyclesPerHour * hourPerDay
 		lazy val costPerDay = costsPerActiveHour * hourPerDay
 		lazy val profit = Profit(
 			inputs.foldLeft(Decimal(0))((s,a) => s + a.value(cyclesPerDay)) + costPerDay,
 			outputs.foldLeft(Decimal(0))((s,a) => s + a.value(cyclesPerDay))
 		)
-		def addStr(indent: Int, totalProfit: Option[Profit], sb: StringBuilder = new StringBuilder()): StringBuilder = {
-			import Amount._
-			for(i <- 0 until Math.max(inputs.size, outputs.size)) {
-				sb++= (if(i == 0)
-					cell( cyclesPerDay, costPerDay, "")
-				else
-					nl + emptyCells(indent + 2))
-				sb++= toCsv(when(i < inputs.size)( inputs(i)))
-				sb++= toCsv(when(i < outputs.size)(outputs(i)))
-				sb++= cell(
-					IncomeLog.toCsv(totalProfit.map(IncomeLog(_)).flatMap(when(i == 0)(_))),
-					profit.toCsv(i == 0),
-					Profit.toCsv(totalProfit.flatMap(when(i == 0)(_)) ))
-			}
-			sb
-		}
 	}
 
-	case class ProductionPoint (	file: os.Path,
-											name: String,
-											price: Decimal,
-											productions: ArrayBuffer[Production] = ArrayBuffer.empty
-										) extends Named {
+	case class Factory(file: os.Path
+							 , _name: String
+							 , variant: String
+							 , price: Decimal
+							 , productions: ArrayBuffer[Production] = ArrayBuffer.empty
+							) extends Named {
+		var name = _name.split("_").last
+		lazy val totalProfit = productions.foldLeft(Profit())((s,p) => s += p.profit)
 
-		def toCsv(data: Boolean): String = if(data)
-												cell(name.split("_").last, price,"")
-											else nl + emptyCells(2)
-
-		override def toCsv: String = {
-			val totalProfit = productions.foldLeft(Profit())((s,p) => s += p.profit)
-			productions
-				.foldLeft(new StringBuilder){ (sb, p) =>
-					val firstRow = sb.isEmpty
-					sb++= toCsv(firstRow)
-					p.addStr(2, when(firstRow)(totalProfit), sb)
-				}.result
-		}
-
-		def printShort(): Unit =  {
-			FSXtract.log(name + ":")
-			productions.foreach( pprint.log(_) )
-		}
+//		def printShort(): Unit =  {
+//			log(name + ":")
+//			productions.foreach( pprint.log(_) )
+//		}
 	}
 
-	var last: ProductionPoint = null
+	var last: Factory = null
 
 	def updateCapacity(fillType: String, capacity: Int, s: Seq[Amount]*) =
-		s.foreach(_.foreach(a => if(a.fillType == fillType) a.store = capacity))
+		s.foreach(_.foreach(a => if(a.name == fillType) a.store = capacity))
 
 	def xtractor(path: os.Path) = captureWithPartialFunctionOfElementNames {
 		case Vector("placeable", "storeData") => withErrorLog(path) {
 			(e: Elem) =>
-				last = ProductionPoint(path, e\"name", e\"price")
+				val prms: String = e\"name" \@ "params"
+				var name: String = e\"name"
+				val variant = prms.split("[|]").last
+				if(name.contains("%s")) {
+					// Ugly hack for <name params="$l10n_shopItem_woodSellingStation|Wood-Mizer LT15">%s (%s)</name>
+					// in data\placeables\brandless\productionPointsGeneric\sawmill\sawmill.xml
+					//prms.split("[|]").lastOption.foreach(name += "_" + _)
+					name = "sawmill"
+				}
+//				XML.loadString(s"<${name}/>")
+				last = Factory(path, name, variant, e\"price")
+				if (path.segments.exists(_.endsWith("Small"))) {
+					last.name += "_small"
+				}
 				last
 		}
 		case Vector("placeable", "productionPoint", "productions", "production") => withErrorLog(path) {
@@ -162,8 +113,8 @@ object Productions extends Extractor {
 					e\@"params",
 					Decimal(e\@"cyclesPerHour"),
 					Decimal(e\@"costsPerActiveHour"),
-					(e\"inputs"\"_").map(new Amount(_)),
-					(e\"outputs"\"_").map(new Amount(_)))
+					(e\"inputs"\"_").map(new Amount(_)).sorted,
+					(e\"outputs"\"_").map(new Amount(_)).sorted)
 				null
 		}
 		case Vector("placeable", "productionPoint", "storage", "capacity") =>  withErrorLog(path) {
@@ -175,7 +126,7 @@ object Productions extends Extractor {
 		}
 	}
 
-	type T = ProductionPoint
+	type T = Factory
 
 	override
 	def apply(gamePath: String): Seq[T] = {
@@ -184,15 +135,15 @@ object Productions extends Extractor {
 	}
 
 	override
-	def collect(path: os.Path): Seq[ProductionPoint] = {
+	def collect(path: os.Path): Seq[Factory] = {
 		all = os.walk(path, { p => p.last.startsWith("map") && os.isDir(p)})
 			.filter(p => p.ext == "xml"
 				&& os.read.lines
 				.stream(p)
 				.take(2).find( l => l.contains(" type=\"productionPoint") || l.contains(" type=\"greenhouse\"")).isDefined
 			)
-			.foldLeft(Seq.empty[ProductionPoint]) ((lst, p) => {
-				FSXtract.log("Reading ProductionPoints from " + p)
+			.foldLeft(Seq.empty[Factory]) ((lst, p) => {
+				log.info("Reading Productions from " + p)
 				//var pp: ProductionPoint = null
 				os.read.stream(p).readBytesThrough { is =>
 					last = extract(is, xtractor(p)).toSeq.head
@@ -210,15 +161,18 @@ object Productions extends Extractor {
 										*/
 				}
 				// Skip duplicates
-				lst.find(e => e.name == last.name && e.productions == last.productions).fold {
-					//last.printShort()
+				lst.find(e => e.name == last.name).fold {
 					lst :+ last
-				}{ _ =>
-					FSXtract.log("Duplicate production point found:")
-					last.printShort()
-					lst
+				}{ p => // TODO validate
+					if( p.productions == last.productions) {
+						log.warning("Duplicate production point found:\n"+pprint(p))
+						lst
+					} else {
+						last.name += ".2"
+						lst :+ last
+					}
 				}
 			})
-		all.sortWith(_.name.split("_").last < _.name.split("_").last)
+		all.sorted
 	}
 }

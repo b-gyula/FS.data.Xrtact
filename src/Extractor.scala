@@ -1,14 +1,15 @@
+import FSXtract.bVerbose
 import xs4s.{XMLStream, XmlElementExtractor}
-import FSXtract.cellSeparator
+
 import java.io.InputStream
 import scala.math.BigDecimal as Decimal
-import scala.math.BigDecimal.RoundingMode.HALF_DOWN
 import scala.xml.{Elem, NodeSeq}
 import xs4s.syntax.core.*
 
 trait Extractor(val fileName: String = ""
 					,val skipNames: Array[String] = Array()
-	) {
+	) extends WithLogger {
+
 	var directPath = false
 	var dataPath: os.Path = _
 	def _dataPath(gamePath:String) = {
@@ -19,29 +20,19 @@ trait Extractor(val fileName: String = ""
 
 	trait Named {
 		def name: String
-		def toCsv: String
-		def toCsvRow: String = toCsv + nl
 	}
+
+	implicit val userOrd: Ordering[Named] = Ordering.by(_.name)
+
+	def verboseLog(s: Any): Unit = if(bVerbose) pprint.pprintln(s)
 
 	type T <: Named
 
 	def xtractor(p: os.Path): XmlElementExtractor[T]
-	def headers: String
-
-	var actRow = 2
-
-	def nl: String = {
-		actRow += 1
-		"\n"
-	}
 
 	lazy val className = getClass.getSimpleName
 
 	def withErrorLog[A](p: os.Path) (f: Elem => A): Elem => A = { e =>
-		/*			if(logEachObject) {
-						print("Extractor found:")
-						pprintln(e)
-					}*/
 		try f(e)
 		catch {
 			case t: Throwable => throw new Exception(s"Error parsing $className from: $e in $p" , t)
@@ -60,26 +51,27 @@ trait Extractor(val fileName: String = ""
 		os.walk(path, { p => p.last.startsWith("map") && os.isDir(p)})
 			.find(_.last == fileName)
 			.map{ path =>
-				FSXtract.log(s"Reading $className from " + path)
+				log.info(s"Reading $className from " + path)
 				if(skipNames.nonEmpty) {
-					FSXtract.log("Skipping:" + skipNames.mkString(","))
+					log.info("Skipping:" + skipNames.mkString(","))
 				}
 				os.read.stream(path).readBytesThrough { is =>
 					extract(is, xtractor(path)).foreach {
-						case f: T if !skipNames.exists(f.name.startsWith(_))  =>
-							all = all :+ f
+						case f: T =>
+							if (skipNames.exists(f.name.startsWith(_))) {
+								verboseLog(f)
+							} else {
+								verboseLog(f)
+								all = all :+ f
+							}
 						case _ =>
 					}
 				}
 			}.getOrElse(throw new Exception(s"File '$fileName' not found in '$path'"))
-		all
+		all.sorted
 	}
 
 	implicit def strToBool(s: String): Boolean = s.equalsIgnoreCase("true")
-
-	implicit def boolToStr(b: Boolean): String = if (b) "true" else ""
-
-	implicit def floatToStr(f: Float): String = if (f == 0) "" else f.toString
 
 	implicit def nodeSeqToStr(ns: NodeSeq): String = ns.text
 
@@ -90,13 +82,7 @@ trait Extractor(val fileName: String = ""
 
 	implicit def nodeSeqToDec(ns: NodeSeq): Decimal = Decimal(nodeSeqToStr(ns))
 
-	implicit def decimalToStr(b: Decimal): String = if (b == 0) ""
-																	else b.bigDecimal.stripTrailingZeros.toPlainString
-
-	def round(b: Decimal, scale: Int = 0) = b.setScale(scale, HALF_DOWN)
-
-	def cell(s: String*) = s.mkString(cellSeparator)
-	def emptyCells(i: Int) = cellSeparator * i
+	def round(b: Decimal, scale: Int = 0) = Fmt.round(b, scale)
 
 	def extract[T](is: InputStream, x: XmlElementExtractor[T]): Iterator[T] = XMLStream
 		.fromInputStream(is)

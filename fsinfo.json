@@ -1,0 +1,2402 @@
+
+{	"crop": {
+		"barley": {
+			"seed": 0.265,
+			"windrow": 36.8,
+			"yield": 9.6
+			},
+		"beetroot": {
+			"seed": 0.04,
+			"yield": 57.8
+			},
+		"canola": {
+			"seed": 0.049,
+			"yield": 5.8
+			},
+		"carrot": {
+			"seed": 0.01,
+			"yield": 77
+			},
+		"cotton": {
+			"seed": 0.05,
+			"yield": 4.97
+			},
+		"grape": {
+			"yield": 18.4
+			},
+		"grass": {
+			"seed": 0.12,
+			"yield": 43.7
+			},
+		"greenbean": {
+			"seed": 0.28,
+			"yield": 6.975
+			},
+		"maize": {
+			"seed": 0.053,
+			"yield": 9.2
+			},
+		"oat": {
+			"seed": 0.34,
+			"windrow": 36.8,
+			"yield": 5.7
+			},
+		"oilseedradish": {
+			"seed": 0.04,
+			"yield": 9.9
+			},
+		"olive": {
+			"yield": 18.4
+			},
+		"parsnip": {
+			"seed": 0.01,
+			"yield": 69.5
+			},
+		"pea": {
+			"seed": 0.25,
+			"yield": 9.6
+			},
+		"poplar": {
+			"seed": 1.5,
+			"yield": 66.27
+			},
+		"potato": {
+			"seed": 3.733,
+			"yield": 41.3
+			},
+		"rice": {
+			"seed": 0.15625,
+			"yield": 6.6
+			},
+		"ricelonggrain": {
+			"seed": 0.5,
+			"yield": 9
+			},
+		"sorghum": {
+			"seed": 0.035,
+			"yield": 8.2
+			},
+		"soybean": {
+			"seed": 0.214,
+			"yield": 4.5
+			},
+		"spinach": {
+			"seed": 0.01,
+			"yield": 23.1
+			},
+		"sugarbeet": {
+			"seed": 0.034,
+			"yield": 57.8
+			},
+		"sugarcane": {
+			"seed": 12,
+			"yield": 113.4
+			},
+		"sunflower": {
+			"seed": 0.143,
+			"yield": 5.2
+			},
+		"wheat": {
+			"seed": 0.308,
+			"windrow": 36.8,
+			"yield": 8.9
+			}
+	},
+	"price": {
+		"bale_net": -1000,
+		"bale_twine": -1000,
+		"bale_wrap": -1000,
+		"barley": 313,
+		"barrel": 1780,
+		"bathtub": 1710,
+		"beetroot": 122,
+		"boards": 1300,
+		"bread": 1650,
+		"bucket": 1290,
+		"buffalomilk": 3500,
+		"buffalomilk_bottled": 2490,
+		"buffalomozzarella": 7500,
+		"butter": 1120,
+		"cake": 3300,
+		"canned_peas": 2596,
+		"canola": 603,
+		"canola_oil": 1640,
+		"carrot": 132,
+		"cartonroll": 2900,
+		"cement": 1050,
+		"cementbricks": 1580,
+		"cereal": 3800,
+		"chaff": -42,
+		"cheese": 1800,
+		"chilli": 450,
+		"chocolate": 2000,
+		"clothes": 8500,
+		"cotton": 1252,
+		"def": -900,
+		"diesel": 1500,
+		"digestate": 33,
+		"drygrass": -48,
+		"drygrass_windrow": 56,
+		"egg": 1120,
+		"electriccharge": -350,
+		"enoki": 420,
+		"fabric": 4000,
+		"fermentednapacabbage": 650,
+		"fertilizer": 1600,
+		"flour": 690,
+		"forage": 124,
+		"forage_mixing": -39,
+		"furniture": 1950,
+		"garlic": 450,
+		"goatcheese": 1760,
+		"goatmilk": 2820,
+		"goatmilk_bottled": 2110,
+		"grape": 603,
+		"grapejuice": 1650,
+		"grass": -45,
+		"grass_windrow": 45,
+		"greenbean": 720,
+		"herbicide": 1200,
+		"honey": 1000,
+		"jarred_greenbean": 1886,
+		"lettuce": 990,
+		"lime": 225,
+		"liquidfertilizer": 1200,
+		"liquidmanure": 33,
+		"liquidseedtreatment": -700,
+		"maize": 380,
+		"manure": 33,
+		"methane": -450,
+		"milk": 700,
+		"milk_bottled": 580,
+		"mineral_feed": -1200,
+		"napacabbage": 350,
+		"noodlesoup": 1550,
+		"oat": 532,
+		"oilseedradish": -250,
+		"olive": 603,
+		"olive_oil": 2440,
+		"oyster": 865,
+		"paperroll": 3200,
+		"parsnip": 131,
+		"pea": 1040,
+		"pigfood": -1400,
+		"planks": 1941,
+		"poplar": -40,
+		"potato": 222,
+		"potatochips": 1500,
+		"prefabwall": 4950,
+		"preservedbeetroot": 560,
+		"preservedcarrots": 580,
+		"preservedparsnip": 578,
+		"raisins": 1630,
+		"rice": 1100,
+		"rice_bags": 1464,
+		"rice_boxes": 2730,
+		"rice_oil": 1780,
+		"riceflour": 910,
+		"ricelonggrain": 530,
+		"ricerolls": 1550,
+		"ricesaplings": 3330,
+		"roofplates": 1580,
+		"rope": 5050,
+		"seeds": 900,
+		"silage": 121,
+		"silage_additive": -1200,
+		"sorghum": 430,
+		"soupcansbeetroot": 845,
+		"soupcanscarrots": 885,
+		"soupcansmixed": 940,
+		"soupcansparsnip": 880,
+		"soupcanspotato": 1245,
+		"soybean": 778,
+		"spinach": 220,
+		"spinach_bags": 775,
+		"spring_onion": 450,
+		"stone": 50,
+		"straw": 41,
+		"strawberry": 450,
+		"sugar": 500,
+		"sugarbeet": 172,
+		"sugarbeet_cut": 222,
+		"sugarcane": 119,
+		"sunflower": 673,
+		"sunflower_oil": 1780,
+		"tomato": 500,
+		"tree": -100,
+		"treesaplings": -100,
+		"water": -100,
+		"wheat": 337,
+		"wood": 1000,
+		"woodbeam": 2912,
+		"woodchips": 320,
+		"wool": 940
+	}
+	,
+	"factory": {
+		"bakery": {
+			"price": 150000,
+			"recipe": {
+				"bread": {
+					"cost": 60,
+					"cycle": 120,
+					"profit": 0.19,
+					"in": {
+						"flour": 90
+					},
+					"out": {
+						"bread": 45
+					}
+				},
+				"breadRiceFlour": {
+					"cost": 72,
+					"cycle": 48,
+					"profit": 0.17,
+					"in": {
+						"riceflour": 68
+					},
+					"out": {
+						"bread": 45
+					}
+				},
+				"cake": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": 0.88,
+					"in": {
+						"butter": 8,
+						"egg": 8,
+						"flour": 8,
+						"milk_bottled": 8,
+						"strawberry": 8,
+						"sugar": 8
+					},
+					"out": {
+						"cake": 21
+					}
+				},
+				"cakeRiceFlour": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": 0.88,
+					"in": {
+						"butter": 8,
+						"egg": 8,
+						"milk_bottled": 8,
+						"riceflour": 6,
+						"strawberry": 8,
+						"sugar": 8
+					},
+					"out": {
+						"cake": 21
+					}
+				}
+			}
+		},
+		"bakery_small": {
+			"price": 36000,
+			"recipe": {
+				"bread": {
+					"cost": 60,
+					"cycle": 120,
+					"profit": 0.11,
+					"in": {
+						"flour": 9
+					},
+					"out": {
+						"bread": 4.5
+					}
+				},
+				"breadRiceFlour": {
+					"cost": 72,
+					"cycle": 48,
+					"profit": -0.04,
+					"in": {
+						"riceflour": 6.8
+					},
+					"out": {
+						"bread": 4.5
+					}
+				},
+				"cake": {
+					"cost": 60,
+					"cycle": 4.8,
+					"profit": 0.45,
+					"in": {
+						"butter": 8,
+						"egg": 8,
+						"flour": 8,
+						"milk_bottled": 8,
+						"strawberry": 8,
+						"sugar": 8
+					},
+					"out": {
+						"cake": 21
+					}
+				},
+				"cakeRiceFlour": {
+					"cost": 60,
+					"cycle": 4.8,
+					"profit": 0.45,
+					"in": {
+						"butter": 8,
+						"egg": 8,
+						"milk_bottled": 8,
+						"riceflour": 6,
+						"strawberry": 8,
+						"sugar": 8
+					},
+					"out": {
+						"cake": 21
+					}
+				}
+			}
+		},
+		"bga1mw": {
+			"price": 1500000,
+			"recipe": {
+				"biogas": {
+					"cost": 606,
+					"cycle": 24,
+					"profit": 1.45,
+					"in": {
+						"silage": 8484
+					},
+					"out": {
+						"digestate": 7635,
+						"electriccharge": 85,
+						"methane": 5090
+					}
+				},
+				"biogasLiquidManure": {
+					"cost": 606,
+					"cycle": 24,
+					"profit": 5.66,
+					"in": {
+						"liquidmanure": 2020
+					},
+					"out": {
+						"digestate": 1818,
+						"electriccharge": 20,
+						"methane": 1212
+					}
+				},
+				"biogasManure": {
+					"cost": 606,
+					"cycle": 24,
+					"profit": 5.66,
+					"in": {
+						"manure": 2020
+					},
+					"out": {
+						"digestate": 1818,
+						"electriccharge": 20,
+						"methane": 1212
+					}
+				},
+				"biogasSugarbeetCut": {
+					"cost": 606,
+					"cycle": 24,
+					"profit": 0.23,
+					"in": {
+						"sugarbeet_cut": 1010
+					},
+					"out": {
+						"digestate": 909,
+						"electriccharge": 10,
+						"methane": 606
+					}
+				}
+			}
+		},
+		"bga250kw": {
+			"price": 875000,
+			"recipe": {
+				"biogas": {
+					"cost": 151.2,
+					"cycle": 24,
+					"profit": 0.94,
+					"in": {
+						"silage": 2120
+					},
+					"out": {
+						"digestate": 1910,
+						"electriccharge": 1273,
+						"methane": 2
+					}
+				},
+				"biogasLiquidManure": {
+					"cost": 151.2,
+					"cycle": 24,
+					"profit": 4.31,
+					"in": {
+						"liquidmanure": 505
+					},
+					"out": {
+						"digestate": 455,
+						"electriccharge": 303,
+						"methane": 2
+					}
+				},
+				"biogasManure": {
+					"cost": 151.2,
+					"cycle": 24,
+					"profit": 4.31,
+					"in": {
+						"manure": 505
+					},
+					"out": {
+						"digestate": 455,
+						"electriccharge": 303,
+						"methane": 2
+					}
+				},
+				"biogasSugarbeetCut": {
+					"cost": 151.2,
+					"cycle": 24,
+					"profit": -0.01,
+					"in": {
+						"sugarbeet_cut": 253
+					},
+					"out": {
+						"digestate": 227,
+						"electriccharge": 152,
+						"methane": 2
+					}
+				}
+			}
+		},
+		"bga500kw": {
+			"price": 1180000,
+			"recipe": {
+				"biogas": {
+					"cost": 302.4,
+					"cycle": 24,
+					"profit": 0.97,
+					"in": {
+						"silage": 4243
+					},
+					"out": {
+						"digestate": 3820,
+						"electriccharge": 2545,
+						"methane": 42
+					}
+				},
+				"biogasLiquidManure": {
+					"cost": 302.4,
+					"cycle": 24,
+					"profit": 4.68,
+					"in": {
+						"liquidmanure": 1010
+					},
+					"out": {
+						"digestate": 910,
+						"electriccharge": 606,
+						"methane": 42
+					}
+				},
+				"biogasManure": {
+					"cost": 302.4,
+					"cycle": 24,
+					"profit": 4.68,
+					"in": {
+						"manure": 1010
+					},
+					"out": {
+						"digestate": 910,
+						"electriccharge": 606,
+						"methane": 42
+					}
+				},
+				"biogasSugarbeetCut": {
+					"cost": 302.4,
+					"cycle": 24,
+					"profit": 0.12,
+					"in": {
+						"sugarbeet_cut": 505
+					},
+					"out": {
+						"digestate": 455,
+						"electriccharge": 303,
+						"methane": 42
+					}
+				}
+			}
+		},
+		"bga99kw": {
+			"price": 435000,
+			"recipe": {
+				"biogas": {
+					"cost": 60,
+					"cycle": 24,
+					"profit": 0.94,
+					"in": {
+						"silage": 840
+					},
+					"out": {
+						"digestate": 756,
+						"electriccharge": 504,
+						"methane": 1
+					}
+				},
+				"biogasLiquidManure": {
+					"cost": 60,
+					"cycle": 24,
+					"profit": 4.33,
+					"in": {
+						"liquidmanure": 200
+					},
+					"out": {
+						"digestate": 180,
+						"electriccharge": 120,
+						"methane": 1
+					}
+				},
+				"biogasManure": {
+					"cost": 60,
+					"cycle": 24,
+					"profit": 4.33,
+					"in": {
+						"manure": 200
+					},
+					"out": {
+						"digestate": 180,
+						"electriccharge": 120,
+						"methane": 1
+					}
+				},
+				"biogasSugarbeetCut": {
+					"cost": 60,
+					"cycle": 24,
+					"profit": -0.01,
+					"in": {
+						"sugarbeet_cut": 100
+					},
+					"out": {
+						"digestate": 90,
+						"electriccharge": 60,
+						"methane": 1
+					}
+				}
+			}
+		},
+		"carpenter": {
+			"price": 300000,
+			"recipe": {
+				"furnitureWood": {
+					"cost": 72,
+					"cycle": 120,
+					"profit": 2.13,
+					"in": {
+						"wood": 10
+					},
+					"out": {
+						"furniture": 17
+					}
+				},
+				"furnitureBoards": {
+					"cost": 72,
+					"cycle": 192,
+					"profit": 1.04,
+					"in": {
+						"boards": 10
+					},
+					"out": {
+						"furniture": 14
+					}
+				},
+				"furniturePlanks": {
+					"cost": 72,
+					"cycle": 336,
+					"profit": 0.39,
+					"in": {
+						"planks": 10
+					},
+					"out": {
+						"furniture": 14
+					}
+				}
+			}
+		},
+		"carpenter_small": {
+			"price": 36000,
+			"recipe": {
+				"furnitureWood": {
+					"cost": 72,
+					"cycle": 120,
+					"profit": 1.07,
+					"in": {
+						"wood": 1
+					},
+					"out": {
+						"furniture": 1.7
+					}
+				},
+				"furnitureBoards": {
+					"cost": 72,
+					"cycle": 192,
+					"profit": 0.63,
+					"in": {
+						"boards": 1
+					},
+					"out": {
+						"furniture": 1.4
+					}
+				},
+				"furniturePlanks": {
+					"cost": 72,
+					"cycle": 336,
+					"profit": 0.27,
+					"in": {
+						"planks": 1
+					},
+					"out": {
+						"furniture": 1.4
+					}
+				}
+			}
+		},
+		"cementFactory_small": {
+			"price": 37000,
+			"recipe": {
+				"cementBags": {
+					"cost": 24,
+					"cycle": 24,
+					"profit": 2.15,
+					"in": {
+						"stone": 100
+					},
+					"out": {
+						"cement": 18
+					}
+				},
+				"roofPlate": {
+					"cost": 120,
+					"cycle": 24,
+					"profit": 0.97,
+					"in": {
+						"stone": 100
+					},
+					"out": {
+						"roofplates": 12.5
+					}
+				},
+				"cementBrick": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 1.82,
+					"in": {
+						"stone": 100
+					},
+					"out": {
+						"cementbricks": 12.5
+					}
+				},
+				"cementBagsWoodChips": {
+					"cost": 12,
+					"cycle": 48,
+					"profit": -0.49,
+					"in": {
+						"stone": 100,
+						"woodchips": 100
+					},
+					"out": {
+						"cement": 18
+					}
+				},
+				"roofPlateWoodChips": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": -0.48,
+					"in": {
+						"stone": 100,
+						"woodchips": 100
+					},
+					"out": {
+						"roofplates": 12.5
+					}
+				},
+				"cementBrickWoodChips": {
+					"cost": 24,
+					"cycle": 48,
+					"profit": -0.47,
+					"in": {
+						"stone": 100,
+						"woodchips": 100
+					},
+					"out": {
+						"cementbricks": 12.5
+					}
+				}
+			}
+		},
+		"cerealFactory": {
+			"price": 240000,
+			"recipe": {
+				"cereal_raisins": {
+					"cost": 120,
+					"cycle": 216,
+					"profit": 0.2,
+					"in": {
+						"honey": 10,
+						"maize": 40,
+						"oat": 40,
+						"raisins": 10
+					},
+					"out": {
+						"cereal": 20
+					}
+				},
+				"cereal_chocolate": {
+					"cost": 120,
+					"cycle": 216,
+					"profit": 0.2,
+					"in": {
+						"chocolate": 10,
+						"honey": 10,
+						"maize": 36,
+						"oat": 36
+					},
+					"out": {
+						"cereal": 20
+					}
+				},
+				"cereal_riceLongGrain": {
+					"cost": 240,
+					"cycle": 144,
+					"profit": 0.51,
+					"in": {
+						"honey": 15,
+						"ricelonggrain": 40
+					},
+					"out": {
+						"cereal": 15
+					}
+				},
+				"cereal_rice": {
+					"cost": 240,
+					"cycle": 144,
+					"profit": 0.35,
+					"in": {
+						"honey": 15,
+						"rice": 36
+					},
+					"out": {
+						"cereal": 20
+					}
+				}
+			}
+		},
+		"dairy": {
+			"price": 210000,
+			"recipe": {
+				"butter_milk": {
+					"cost": 24,
+					"cycle": 480,
+					"profit": 0.38,
+					"in": {
+						"milk": 15
+					},
+					"out": {
+						"butter": 13
+					}
+				},
+				"butter_goatMilk": {
+					"cost": 96,
+					"cycle": 744,
+					"profit": 0.3,
+					"in": {
+						"goatmilk": 3
+					},
+					"out": {
+						"butter": 10
+					}
+				},
+				"butter_buffaloMilk": {
+					"cost": 192,
+					"cycle": 52.8,
+					"profit": 2.57,
+					"in": {
+						"buffalomilk": 3
+					},
+					"out": {
+						"butter": 45
+					}
+				},
+				"cheese": {
+					"cost": 24,
+					"cycle": 1320,
+					"profit": 0.7,
+					"in": {
+						"milk": 3
+					},
+					"out": {
+						"cheese": 2
+					}
+				},
+				"goatcheese": {
+					"cost": 96,
+					"cycle": 960,
+					"profit": 0.23,
+					"in": {
+						"goatmilk": 3
+					},
+					"out": {
+						"goatcheese": 6
+					}
+				},
+				"buffalomozzarella": {
+					"cost": 192,
+					"cycle": 480,
+					"profit": 0.38,
+					"in": {
+						"buffalomilk": 3
+					},
+					"out": {
+						"buffalomozzarella": 2
+					}
+				},
+				"chocolate": {
+					"cost": 24,
+					"cycle": 2520,
+					"profit": 0.65,
+					"in": {
+						"milk": 1,
+						"sugar": 1
+					},
+					"out": {
+						"chocolate": 1
+					}
+				},
+				"milkBottled": {
+					"cost": 24,
+					"cycle": 480,
+					"profit": 0.65,
+					"in": {
+						"milk": 10
+					},
+					"out": {
+						"milk_bottled": 20
+					}
+				},
+				"goatmilkBottled": {
+					"cost": 96,
+					"cycle": 144,
+					"profit": 0.46,
+					"in": {
+						"goatmilk": 10
+					},
+					"out": {
+						"goatmilk_bottled": 20
+					}
+				},
+				"buffalomilkBottled": {
+					"cost": 192,
+					"cycle": 144,
+					"profit": 0.37,
+					"in": {
+						"buffalomilk": 10
+					},
+					"out": {
+						"buffalomilk_bottled": 20
+					}
+				}
+			}
+		},
+		"dairy_small": {
+			"price": 36000,
+			"recipe": {
+				"butter_milk": {
+					"cost": 24,
+					"cycle": 48,
+					"profit": 0.32,
+					"in": {
+						"milk": 15
+					},
+					"out": {
+						"butter": 13
+					}
+				},
+				"butter_goatMilk": {
+					"cost": 96,
+					"cycle": 74.4,
+					"profit": 0.15,
+					"in": {
+						"goatmilk": 3
+					},
+					"out": {
+						"butter": 10
+					}
+				},
+				"butter_buffaloMilk": {
+					"cost": 192,
+					"cycle": 5.28,
+					"profit": 0.08,
+					"in": {
+						"buffalomilk": 3
+					},
+					"out": {
+						"butter": 45
+					}
+				},
+				"cheese": {
+					"cost": 24,
+					"cycle": 132,
+					"profit": 0.58,
+					"in": {
+						"milk": 3
+					},
+					"out": {
+						"cheese": 2
+					}
+				},
+				"goatcheese": {
+					"cost": 96,
+					"cycle": 96,
+					"profit": 0.12,
+					"in": {
+						"goatmilk": 3
+					},
+					"out": {
+						"goatcheese": 6
+					}
+				},
+				"buffalomozzarella": {
+					"cost": 192,
+					"cycle": 48,
+					"profit": 0.03,
+					"in": {
+						"buffalomilk": 3
+					},
+					"out": {
+						"buffalomozzarella": 2
+					}
+				},
+				"chocolate": {
+					"cost": 24,
+					"cycle": 252,
+					"profit": 0.55,
+					"in": {
+						"milk": 1,
+						"sugar": 1
+					},
+					"out": {
+						"chocolate": 1
+					}
+				},
+				"milkBottled": {
+					"cost": 24,
+					"cycle": 48,
+					"profit": 0.55,
+					"in": {
+						"milk": 10
+					},
+					"out": {
+						"milk_bottled": 20
+					}
+				},
+				"goatmilkBottled": {
+					"cost": 96,
+					"cycle": 14.4,
+					"profit": 0.21,
+					"in": {
+						"goatmilk": 10
+					},
+					"out": {
+						"goatmilk_bottled": 20
+					}
+				},
+				"buffalomilkBottled": {
+					"cost": 192,
+					"cycle": 14.4,
+					"profit": 0.03,
+					"in": {
+						"buffalomilk": 10
+					},
+					"out": {
+						"buffalomilk_bottled": 20
+					}
+				}
+			}
+		},
+		"grainMill": {
+			"price": 288000,
+			"recipe": {
+				"flourWheat": {
+					"cost": 24,
+					"cycle": 2520,
+					"profit": 0.63,
+					"in": {
+						"wheat": 5
+					},
+					"out": {
+						"flour": 4
+					}
+				},
+				"flourBarley": {
+					"cost": 24,
+					"cycle": 480,
+					"profit": 0.61,
+					"in": {
+						"barley": 30
+					},
+					"out": {
+						"flour": 22
+					}
+				},
+				"flourOat": {
+					"cost": 24,
+					"cycle": 1200,
+					"profit": 0.29,
+					"in": {
+						"oat": 15
+					},
+					"out": {
+						"flour": 15
+					}
+				},
+				"flourSorghum": {
+					"cost": 24,
+					"cycle": 1200,
+					"profit": 0.39,
+					"in": {
+						"sorghum": 15
+					},
+					"out": {
+						"flour": 13
+					}
+				},
+				"flourRiceLongGrain": {
+					"cost": 48,
+					"cycle": 720,
+					"profit": 0.48,
+					"in": {
+						"ricelonggrain": 15
+					},
+					"out": {
+						"riceflour": 13
+					}
+				},
+				"flourRice": {
+					"cost": 24,
+					"cycle": 720,
+					"profit": 0.37,
+					"in": {
+						"rice": 9
+					},
+					"out": {
+						"riceflour": 15
+					}
+				}
+			}
+		},
+		"grainMill_small": {
+			"price": 36000,
+			"recipe": {
+				"flourWheat": {
+					"cost": 24,
+					"cycle": 252,
+					"profit": 0.55,
+					"in": {
+						"wheat": 5
+					},
+					"out": {
+						"flour": 4
+					}
+				},
+				"flourBarley": {
+					"cost": 24,
+					"cycle": 48,
+					"profit": 0.53,
+					"in": {
+						"barley": 30
+					},
+					"out": {
+						"flour": 22
+					}
+				},
+				"flourOat": {
+					"cost": 24,
+					"cycle": 120,
+					"profit": 0.26,
+					"in": {
+						"oat": 15
+					},
+					"out": {
+						"flour": 15
+					}
+				},
+				"flourSorghum": {
+					"cost": 24,
+					"cycle": 120,
+					"profit": 0.35,
+					"in": {
+						"sorghum": 15
+					},
+					"out": {
+						"flour": 13
+					}
+				},
+				"flourRiceLongGrain": {
+					"cost": 48,
+					"cycle": 72,
+					"profit": 0.37,
+					"in": {
+						"ricelonggrain": 15
+					},
+					"out": {
+						"riceflour": 13
+					}
+				},
+				"flourRice": {
+					"cost": 24,
+					"cycle": 72,
+					"profit": 0.33,
+					"in": {
+						"rice": 9
+					},
+					"out": {
+						"riceflour": 15
+					}
+				}
+			}
+		},
+		"grapeProcessing": {
+			"price": 240000,
+			"recipe": {
+				"raisins": {
+					"cost": 60,
+					"cycle": 5280,
+					"profit": 0.34,
+					"in": {
+						"grape": 2
+					},
+					"out": {
+						"raisins": 1
+					}
+				},
+				"grapejuice": {
+					"cost": 60,
+					"cycle": 720,
+					"profit": 0.35,
+					"in": {
+						"grape": 14
+					},
+					"out": {
+						"grapejuice": 7
+					}
+				}
+			}
+		},
+		"grapeProcessing_small": {
+			"price": 36000,
+			"recipe": {
+				"raisins": {
+					"cost": 60,
+					"cycle": 528,
+					"profit": 0.24,
+					"in": {
+						"grape": 2
+					},
+					"out": {
+						"raisins": 1
+					}
+				},
+				"grapejuice": {
+					"cost": 60,
+					"cycle": 72,
+					"profit": 0.25,
+					"in": {
+						"grape": 14
+					},
+					"out": {
+						"grapejuice": 7
+					}
+				}
+			}
+		},
+		"greenHouseGlassLarge": {
+			"price": 54000,
+			"recipe": {
+				"tomato": {
+					"cost": 2.4,
+					"cycle": 1056,
+					"profit": 3.98,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"tomato": 4
+					}
+				},
+				"lettuce": {
+					"cost": 2.4,
+					"cycle": 1008,
+					"profit": 3.94,
+					"in": {
+						"water": 8
+					},
+					"out": {
+						"lettuce": 4
+					}
+				},
+				"strawberry": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 7.91,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"strawberry": 8
+					}
+				},
+				"springOnion": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 7.87,
+					"in": {
+						"water": 6
+					},
+					"out": {
+						"spring_onion": 12
+					}
+				},
+				"napaCabbage": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 1.61,
+					"in": {
+						"water": 8
+					},
+					"out": {
+						"napacabbage": 6
+					}
+				},
+				"chilli": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 1.99,
+					"in": {
+						"water": 12
+					},
+					"out": {
+						"chilli": 8
+					}
+				},
+				"garlic": {
+					"cost": 2.4,
+					"cycle": 720,
+					"profit": 1.24,
+					"in": {
+						"water": 12
+					},
+					"out": {
+						"garlic": 6
+					}
+				}
+			}
+		},
+		"greenHouseGlassMedium": {
+			"price": 27000,
+			"recipe": {
+				"tomato": {
+					"cost": 2.4,
+					"cycle": 1056,
+					"profit": 3.95,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"tomato": 2
+					}
+				},
+				"lettuce": {
+					"cost": 2.4,
+					"cycle": 1008,
+					"profit": 3.92,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"lettuce": 2
+					}
+				},
+				"strawberry": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 7.76,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"strawberry": 4
+					}
+				},
+				"springOnion": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 7.77,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"spring_onion": 6
+					}
+				},
+				"napaCabbage": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 1.6,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"napacabbage": 3
+					}
+				},
+				"chilli": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 1.97,
+					"in": {
+						"water": 6
+					},
+					"out": {
+						"chilli": 4
+					}
+				},
+				"garlic": {
+					"cost": 2.4,
+					"cycle": 720,
+					"profit": 1.24,
+					"in": {
+						"water": 6
+					},
+					"out": {
+						"garlic": 3
+					}
+				}
+			}
+		},
+		"greenHouseGlassSmall": {
+			"price": 13500,
+			"recipe": {
+				"tomato": {
+					"cost": 2.4,
+					"cycle": 1056,
+					"profit": 3.87,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"tomato": 1
+					}
+				},
+				"lettuce": {
+					"cost": 2.4,
+					"cycle": 1008,
+					"profit": 3.88,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"lettuce": 1
+					}
+				},
+				"strawberry": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 7.57,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"strawberry": 2
+					}
+				},
+				"springOnion": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 7.66,
+					"in": {
+						"water": 1.5
+					},
+					"out": {
+						"spring_onion": 3
+					}
+				},
+				"napaCabbage": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 1.59,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"napacabbage": 1.5
+					}
+				},
+				"chilli": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 1.96,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"chilli": 2
+					}
+				},
+				"garlic": {
+					"cost": 2.4,
+					"cycle": 720,
+					"profit": 1.23,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"garlic": 1.5
+					}
+				}
+			}
+		},
+		"greenHouseMushroomsLarge": {
+			"price": 36000,
+			"recipe": {
+				"enoki": {
+					"cost": 2.4,
+					"cycle": 816,
+					"profit": 19.31,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"enoki": 5
+					}
+				},
+				"oyster": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 24.13,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"oyster": 3
+					}
+				}
+			}
+		},
+		"greenHouseMushroomsMedium": {
+			"price": 18000,
+			"recipe": {
+				"enoki": {
+					"cost": 2.4,
+					"cycle": 408,
+					"profit": 18.75,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"enoki": 5
+					}
+				},
+				"oyster": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 22.96,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"oyster": 3
+					}
+				}
+			}
+		},
+		"greenHouseMushroomsSmall": {
+			"price": 9000,
+			"recipe": {
+				"enoki": {
+					"cost": 2.4,
+					"cycle": 204,
+					"profit": 18.11,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"enoki": 5
+					}
+				},
+				"oyster": {
+					"cost": 2.4,
+					"cycle": 168,
+					"profit": 21.47,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"oyster": 3
+					}
+				}
+			}
+		},
+		"greenHousesSaplings": {
+			"price": 3000,
+			"recipe": {
+				"riceSaplings": {
+					"cost": 2.4,
+					"cycle": 48,
+					"profit": 8.76,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"ricesaplings": 1
+					}
+				}
+			}
+		},
+		"greenHousesTarpLarge": {
+			"price": 36000,
+			"recipe": {
+				"tomato": {
+					"cost": 2.4,
+					"cycle": 1056,
+					"profit": 3.98,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"tomato": 4
+					}
+				},
+				"lettuce": {
+					"cost": 2.4,
+					"cycle": 1008,
+					"profit": 3.94,
+					"in": {
+						"water": 8
+					},
+					"out": {
+						"lettuce": 4
+					}
+				},
+				"strawberry": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 7.91,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"strawberry": 8
+					}
+				},
+				"springOnion": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 7.87,
+					"in": {
+						"water": 6
+					},
+					"out": {
+						"spring_onion": 12
+					}
+				},
+				"napaCabbage": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 1.61,
+					"in": {
+						"water": 8
+					},
+					"out": {
+						"napacabbage": 6
+					}
+				},
+				"chilli": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 1.99,
+					"in": {
+						"water": 12
+					},
+					"out": {
+						"chilli": 8
+					}
+				},
+				"garlic": {
+					"cost": 2.4,
+					"cycle": 720,
+					"profit": 1.24,
+					"in": {
+						"water": 12
+					},
+					"out": {
+						"garlic": 6
+					}
+				}
+			}
+		},
+		"greenHousesTarpMedium": {
+			"price": 18000,
+			"recipe": {
+				"tomato": {
+					"cost": 2.4,
+					"cycle": 1056,
+					"profit": 3.95,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"tomato": 2
+					}
+				},
+				"lettuce": {
+					"cost": 2.4,
+					"cycle": 1008,
+					"profit": 3.92,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"lettuce": 2
+					}
+				},
+				"strawberry": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 7.76,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"strawberry": 4
+					}
+				},
+				"springOnion": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 7.77,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"spring_onion": 6
+					}
+				},
+				"napaCabbage": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 1.6,
+					"in": {
+						"water": 4
+					},
+					"out": {
+						"napacabbage": 3
+					}
+				},
+				"chilli": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 1.97,
+					"in": {
+						"water": 6
+					},
+					"out": {
+						"chilli": 4
+					}
+				},
+				"garlic": {
+					"cost": 2.4,
+					"cycle": 720,
+					"profit": 1.24,
+					"in": {
+						"water": 6
+					},
+					"out": {
+						"garlic": 3
+					}
+				}
+			}
+		},
+		"greenHousesTarpSmall": {
+			"price": 9000,
+			"recipe": {
+				"tomato": {
+					"cost": 2.4,
+					"cycle": 1056,
+					"profit": 3.87,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"tomato": 1
+					}
+				},
+				"lettuce": {
+					"cost": 2.4,
+					"cycle": 1008,
+					"profit": 3.88,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"lettuce": 1
+					}
+				},
+				"strawberry": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 7.57,
+					"in": {
+						"water": 1
+					},
+					"out": {
+						"strawberry": 2
+					}
+				},
+				"springOnion": {
+					"cost": 2.4,
+					"cycle": 336,
+					"profit": 7.66,
+					"in": {
+						"water": 1.5
+					},
+					"out": {
+						"spring_onion": 3
+					}
+				},
+				"napaCabbage": {
+					"cost": 2.4,
+					"cycle": 672,
+					"profit": 1.59,
+					"in": {
+						"water": 2
+					},
+					"out": {
+						"napacabbage": 1.5
+					}
+				},
+				"chilli": {
+					"cost": 2.4,
+					"cycle": 528,
+					"profit": 1.96,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"chilli": 2
+					}
+				},
+				"garlic": {
+					"cost": 2.4,
+					"cycle": 720,
+					"profit": 1.23,
+					"in": {
+						"water": 3
+					},
+					"out": {
+						"garlic": 1.5
+					}
+				}
+			}
+		},
+		"oilMill": {
+			"price": 240000,
+			"recipe": {
+				"sunflower_oil": {
+					"cost": 60,
+					"cycle": 480,
+					"profit": 0.31,
+					"in": {
+						"sunflower": 20
+					},
+					"out": {
+						"sunflower_oil": 10
+					}
+				},
+				"canola_oil": {
+					"cost": 60,
+					"cycle": 480,
+					"profit": 0.35,
+					"in": {
+						"canola": 20
+					},
+					"out": {
+						"canola_oil": 10
+					}
+				},
+				"olive_oil": {
+					"cost": 60,
+					"cycle": 240,
+					"profit": 0.59,
+					"in": {
+						"olive": 25
+					},
+					"out": {
+						"olive_oil": 10
+					}
+				},
+				"rice_oil_longGrainRice": {
+					"cost": 60,
+					"cycle": 480,
+					"profit": 0.33,
+					"in": {
+						"ricelonggrain": 25
+					},
+					"out": {
+						"rice_oil": 10
+					}
+				},
+				"rice_oil_rice": {
+					"cost": 60,
+					"cycle": 480,
+					"profit": 0.34,
+					"in": {
+						"rice": 12
+					},
+					"out": {
+						"rice_oil": 10
+					}
+				}
+			}
+		},
+		"oilMill_small": {
+			"price": 36000,
+			"recipe": {
+				"sunflower_oil": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": 0.21,
+					"in": {
+						"sunflower": 20
+					},
+					"out": {
+						"sunflower_oil": 10
+					}
+				},
+				"canola_oil": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": 0.23,
+					"in": {
+						"canola": 20
+					},
+					"out": {
+						"canola_oil": 10
+					}
+				},
+				"olive_oil": {
+					"cost": 60,
+					"cycle": 24,
+					"profit": 0.39,
+					"in": {
+						"olive": 25
+					},
+					"out": {
+						"olive_oil": 10
+					}
+				},
+				"rice_oil_longGrainRice": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": 0.23,
+					"in": {
+						"ricelonggrain": 25
+					},
+					"out": {
+						"rice_oil": 10
+					}
+				},
+				"rice_oil_rice": {
+					"cost": 60,
+					"cycle": 48,
+					"profit": 0.23,
+					"in": {
+						"rice": 12
+					},
+					"out": {
+						"rice_oil": 10
+					}
+				}
+			}
+		},
+		"paperFactory": {
+			"price": 525000,
+			"recipe": {
+				"cartonRoll": {
+					"cost": 120,
+					"cycle": 24,
+					"profit": 0.47,
+					"in": {
+						"wood": 420
+					},
+					"out": {
+						"cartonroll": 215
+					}
+				},
+				"paperRoll": {
+					"cost": 72,
+					"cycle": 24,
+					"profit": 0.37,
+					"in": {
+						"wood": 535
+					},
+					"out": {
+						"paperroll": 230
+					}
+				}
+			}
+		},
+		"preservedFoodFactory_small": {
+			"price": 36000,
+			"recipe": {
+				"preservedFoodCarrots": {
+					"cost": 96,
+					"cycle": 24,
+					"profit": 0.52,
+					"in": {
+						"carrot": 100
+					},
+					"out": {
+						"preservedcarrots": 45
+					}
+				},
+				"preservedFoodParsnip": {
+					"cost": 96,
+					"cycle": 24,
+					"profit": 0.52,
+					"in": {
+						"parsnip": 100
+					},
+					"out": {
+						"preservedparsnip": 45
+					}
+				},
+				"preservedFoodBeetRoot": {
+					"cost": 96,
+					"cycle": 24,
+					"profit": 0.56,
+					"in": {
+						"beetroot": 100
+					},
+					"out": {
+						"preservedbeetroot": 45
+					}
+				},
+				"preservedFoodCannedPea": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.1,
+					"in": {
+						"pea": 100
+					},
+					"out": {
+						"canned_peas": 45
+					}
+				},
+				"preservedFoodSpinachBags": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.45,
+					"in": {
+						"spinach": 100
+					},
+					"out": {
+						"spinach_bags": 45
+					}
+				},
+				"preservedFoodRiceBags": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.2,
+					"in": {
+						"ricelonggrain": 100
+					},
+					"out": {
+						"rice_bags": 45
+					}
+				},
+				"preservedFoodRiceBoxes": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.1,
+					"in": {
+						"rice": 100
+					},
+					"out": {
+						"rice_boxes": 45
+					}
+				},
+				"preservedFoodjarredGreenbean": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.15,
+					"in": {
+						"greenbean": 100
+					},
+					"out": {
+						"jarred_greenbean": 45
+					}
+				},
+				"preservedFoodFermentedNapaCabbage": {
+					"cost": 120,
+					"cycle": 24,
+					"profit": 0.85,
+					"in": {
+						"chilli": 2,
+						"garlic": 2,
+						"napacabbage": 20,
+						"spring_onion": 2
+					},
+					"out": {
+						"fermentednapacabbage": 42
+					}
+				},
+				"noodleSoupFlour": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.21,
+					"in": {
+						"egg": 10,
+						"flour": 55
+					},
+					"out": {
+						"noodlesoup": 40
+					}
+				},
+				"noodleSoupRiceFlour": {
+					"cost": 24,
+					"cycle": 24,
+					"profit": 0.23,
+					"in": {
+						"egg": 10,
+						"riceflour": 42
+					},
+					"out": {
+						"noodlesoup": 40
+					}
+				},
+				"riceRollsRiceLongGrain": {
+					"cost": 120,
+					"cycle": 24,
+					"profit": 0.26,
+					"in": {
+						"ricelonggrain": 60
+					},
+					"out": {
+						"ricerolls": 30
+					}
+				},
+				"riceRollsRice": {
+					"cost": 168,
+					"cycle": 24,
+					"profit": 0.13,
+					"in": {
+						"rice": 56
+					},
+					"out": {
+						"ricerolls": 50
+					}
+				}
+			}
+		},
+		"sawmill": {
+			"price": 300000,
+			"recipe": {
+				"boards": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.37,
+					"in": {
+						"wood": 416
+					},
+					"out": {
+						"boards": 410,
+						"woodchips": 120
+					}
+				},
+				"planks": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.37,
+					"in": {
+						"wood": 416
+					},
+					"out": {
+						"planks": 275,
+						"woodchips": 120
+					}
+				},
+				"woodBeam": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.39,
+					"in": {
+						"wood": 416
+					},
+					"out": {
+						"woodbeam": 183,
+						"woodchips": 150
+					}
+				},
+				"prefabWall": {
+					"cost": 48,
+					"cycle": 33.6,
+					"profit": 0.2,
+					"in": {
+						"wood": 412
+					},
+					"out": {
+						"prefabwall": 100
+					}
+				}
+			}
+		},
+		"sawmill.2": {
+			"variant": "Wood-Mizer LT15",
+			"price": 150000,
+			"recipe": {
+				"boards": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.36,
+					"in": {
+						"wood": 208
+					},
+					"out": {
+						"boards": 205,
+						"woodchips": 60
+					}
+				},
+				"planks": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.37,
+					"in": {
+						"wood": 208
+					},
+					"out": {
+						"planks": 138,
+						"woodchips": 60
+					}
+				},
+				"woodBeam": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.87,
+					"in": {
+						"wood": 208
+					},
+					"out": {
+						"woodbeam": 125,
+						"woodchips": 91
+					}
+				}
+			}
+		},
+		"sawmill_small": {
+			"price": 36000,
+			"recipe": {
+				"boards": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.24,
+					"in": {
+						"wood": 41
+					},
+					"out": {
+						"boards": 41
+					}
+				},
+				"planks": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.22,
+					"in": {
+						"wood": 41
+					},
+					"out": {
+						"planks": 27
+					}
+				},
+				"woodBeam": {
+					"cost": 48,
+					"cycle": 24,
+					"profit": 0.22,
+					"in": {
+						"wood": 41
+					},
+					"out": {
+						"woodbeam": 18
+					}
+				}
+			}
+		},
+		"spinnery": {
+			"price": 180000,
+			"recipe": {
+				"fabric_wool": {
+					"cost": 120,
+					"cycle": 1440,
+					"profit": 0.38,
+					"in": {
+						"wool": 3
+					},
+					"out": {
+						"fabric": 1
+					}
+				},
+				"fabric_cotton": {
+					"cost": 120,
+					"cycle": 2400,
+					"profit": 0.06,
+					"in": {
+						"cotton": 9
+					},
+					"out": {
+						"fabric": 3
+					}
+				}
+			}
+		},
+		"spinnery_small": {
+			"price": 36000,
+			"recipe": {
+				"fabric_wool": {
+					"cost": 120,
+					"cycle": 144,
+					"profit": 0.1,
+					"in": {
+						"wool": 3
+					},
+					"out": {
+						"fabric": 1
+					}
+				},
+				"fabric_cotton": {
+					"cost": 120,
+					"cycle": 240,
+					"profit": 0.02,
+					"in": {
+						"cotton": 9
+					},
+					"out": {
+						"fabric": 3
+					}
+				}
+			}
+		},
+		"sugarMill": {
+			"price": 240000,
+			"recipe": {
+				"sugarbeet_sugar": {
+					"cost": 120,
+					"cycle": 12720,
+					"profit": 0.49,
+					"in": {
+						"sugarbeet": 2
+					},
+					"out": {
+						"sugar": 1.05
+					}
+				},
+				"sugarbeetCut_sugar": {
+					"cost": 72,
+					"cycle": 5880,
+					"profit": 0.34,
+					"in": {
+						"sugarbeet_cut": 5
+					},
+					"out": {
+						"sugar": 3
+					}
+				},
+				"sugarcane_sugar": {
+					"cost": 120,
+					"cycle": 8760,
+					"profit": 0.99,
+					"in": {
+						"sugarcane": 2
+					},
+					"out": {
+						"sugar": 1
+					}
+				}
+			}
+		},
+		"sugarMill_small": {
+			"price": 36000,
+			"recipe": {
+				"sugarbeet_sugar": {
+					"cost": 120,
+					"cycle": 1272,
+					"profit": 0.2,
+					"in": {
+						"sugarbeet": 2
+					},
+					"out": {
+						"sugar": 1.05
+					}
+				},
+				"sugarbeetCut_sugar": {
+					"cost": 72,
+					"cycle": 588,
+					"profit": 0.22,
+					"in": {
+						"sugarbeet_cut": 5
+					},
+					"out": {
+						"sugar": 3
+					}
+				},
+				"sugarcane_sugar": {
+					"cost": 120,
+					"cycle": 876,
+					"profit": 0.34,
+					"in": {
+						"sugarcane": 2
+					},
+					"out": {
+						"sugar": 1
+					}
+				}
+			}
+		},
+		"tailorShop": {
+			"price": 240000,
+			"recipe": {
+				"clothes": {
+					"cost": 240,
+					"cycle": 2400,
+					"profit": 0.06,
+					"in": {
+						"fabric": 4
+					},
+					"out": {
+						"clothes": 2
+					}
+				}
+			}
+		},
+		"tailorShop_small": {
+			"price": 36000,
+			"recipe": {
+				"clothes": {
+					"cost": 240,
+					"cycle": 240,
+					"in": {
+						"fabric": 4
+					},
+					"out": {
+						"clothes": 2
+					}
+				}
+			}
+		}
+	}
+}
+	

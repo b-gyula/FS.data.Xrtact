@@ -1,0 +1,32 @@
+{
+	"fruit": {
+		"wheat": {
+			"seed" : 0.5,
+			"yield": 8.9,
+			"windrow": 38.6
+		}
+	},
+	"price": {
+		"wheat": 337,
+		"oat": 32
+	},
+	"factory": {
+		"sawmill": {
+			"price": 300000,
+			"recipe": {
+				"boards": {
+					"cycle": 24,
+					"cost": 24,
+					"profit": 10,
+					"in": {
+						"wood": 416
+					},
+					"out": {
+						"boards": 275,
+						"woodchips": 120
+					}
+				}
+			}
+		}
+	}
+}

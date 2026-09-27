@@ -11,14 +11,13 @@ import math.BigDecimal as Decimal
 import scala.xml.Elem
 
 object FillTypes extends Extractor("maps_fillTypes.xml"
-		,Array("horse_","cow_","sheep_","pig_","chicken","weed","snow",
-				 "roadsalt","air","tarp","squarebale","roundbale","meadow")) {
+		,Array("horse_","cow_","sheep_","pig_","chicken","weed","snow", "roadsalt","air","tarp",
+		"squarebale","roundbale","meadow", "barley_cut", "oat_cut","wheat_cut","soybean_cut","canola_cut")) {
 	type T = FillType
-	override
-	val headers = cell("name","price","showOnPriceTable")
 
 	case class FillType(name: String, price: Decimal, showOnPriceTable: Boolean) extends Named {
-		override def toCsv = cell(name, price * 1000, showOnPriceTable)
+		/** price in game units per m3 (parsed per liter) */
+		def pricePerM3: Decimal = price * 1000
 	}
 
 	override

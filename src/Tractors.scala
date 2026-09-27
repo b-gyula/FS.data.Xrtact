@@ -15,9 +15,7 @@ object Tractors extends Extractor {
 	/** Return each tractor with only the first engine variant*/
 	var firstEngineOnly = false
 
-	case class Engine(name: String, hp:Int, price: Int) {
-		def toCsv: String = cell(name, hp.toString, price.toString)
-	}
+	case class Engine(name: String, hp:Int, price: Int)
 
 	case class Tractor(brand: String,
 							 series: String,
@@ -30,16 +28,7 @@ object Tractors extends Extractor {
 							)
 		extends Named {
 		val name = "" // Just for Named
-		override
-		def toCsvRow: String = engines.foldLeft(new StringBuilder()) (
-			(sb, e) => sb ++= toCsv.format(e.toCsv) + nl
-		).result
-
-		override
-		def toCsv: String = cell(brand, series, "%s", maxSpeed.toString, cat, extra.mkString("\"",", ","\""))
 	}
-	override
-	val headers = cell("brand","series","name","hp","price","maxSpeed","cat","extras")
 
 	override
 	def apply(gamePath: String): Seq[T] = {
@@ -63,7 +52,7 @@ object Tractors extends Extractor {
 				} else false
 			} else false )
 			.foldLeft(Seq.empty[Tractor]) ((lst, f) => {
-				FSXtract.log("Reading Tractor from " + f)
+				log.info("Reading Tractor from " + f)
 				lst ++ os.read.stream(f).readBytesThrough { is =>
 					extract(is, xtractor(f)).filter(_!=null).toSeq
 				}

@@ -1,11 +1,187 @@
 :hardbreaks:
 = Farming simulator data extractor
 
-Extracts fruit and fill type prices into `fruits.csv` and `prices.csv`, productions into `prods.csv` and
-"tractors into `tractors.csv` from the game install folder specified by the first (p) parameter.
+Extracts fruit and fill type prices and productions into a (fsinfo.)json file from the given game install folder.
+With command line parameter `-c` `fruits.csv`, `prices.csv`, `prods.csv` and tractors information into `tractors.csv` is generated instead
 
-== ERROR
-*`fruitTypes` file structure changed, the generation does not work!!*
+[cols="^1,4a",headers]
+|===
+|Option |Desc
+
+|-p / <1st param> / --path| The path/to/game install folder
+|-o / --out <file name> | Name of the output file. 'fsinfo.json' by default
+|-e / --extract | information to extract:
+c: crop + prices
+p: prices
+f: factories
+t: tractors (Only for CSV output)
+
+|-c / --csv | generate CSV files with the given separator into crops.csv, prices.csv, factories.csv and tractors.csv depending on parameter `-e`. ';' used by default
+
+|-x / --xsl | generate any file format transformed from the standard XML using the given
+|===
+
+Examples::
+Generate (fsinfo.) XML instead of JSON:
+`fsXtract "C:\Program Files\Farming Simulator 25" -x=`
+
+
+=== JSON output
+Example::
+```json
+{
+  "crop": {
+    "wheat": {
+      "seed": 0.308,
+      "yield": 8.9,
+      "windrow": 36.8
+    },
+    "barley": {
+      "seed": 0.265,
+      "yield": 9.6,
+      "windrow": 36.8
+    }
+  },
+  "price": {
+    "wheat": 337,
+    "barley": 313,
+    "water": -100
+  },
+  "factory": {
+    "bakery": {
+      "price": 150000,
+      "recipe": {
+        "bread": {
+          "cost": 2.5,
+          "cycle": 5,
+          "profit": 0.06,
+          "in": {"flour": 90, "egg": 3},
+          "out": {"bread": 45}
+        }
+      }
+    }
+  }
+}
+```
+
+`crop` - map of crop name to crop data. Each crop entry has:
+
+|===
+| Attribute | Type | Required | Description
+
+| `seed` | number | no | seed required m3/ha
+| `yield` | number | yes | yield m3/ha
+| `windrow` | number | no | windrow generated m3/ha
+|===
+`price` - map of crop/goods name to price per 1000 liter (integer). Negative values mark a price that is not shown in the price list.
+
+`factory` - map of factory name to factory data. Each factory has:
+|===
+| Attribute | Type | Required | Description
+
+| `price` | integer | yes | purchase price of the factory
+| `variant` | string | no | variant identifier (e.g. equipment brand/model)
+| `recipe` | object | yes | map of recipe name to recipe data
+|===
+Each recipe entry has:
+|===
+| Attribute | Type | Required | Description |
+
+| `cycle` | integer | yes | cycles per hour |
+| `cost` | integer | yes | cost per active hour |
+| `in` | object | yes | map of material name to liters used per cycle |
+| `out` | object | yes | map of material name to liters created per cycle |
+|===
+
+=== XML output
+```xml
+<fs>
+   <crop>
+       <{crop name} seed="{seed required m3/ha}" yield="{yield m3/ha}" windrow="{windrow generated m3/ha}"/>
+      ...
+   </crop>
+   <price {crop/goods}="{price of 1000 liter}" .../>
+   <factory price="{price}">
+      <{factory name}>
+         <{recipe name}
+            cost="{hourly cost of running the recipe}"
+            cycle="{cycles / hour}"
+            profit="{ratio: profit / cost (inputs price + running cost / day)}">
+            <in flour="{required material liter per cycle}"/>
+            <out bread="{created product liter per cycle}"/>
+         </{recipe name}>
+      </{factory name}>
+   </factory>
+</fs>
+```
+
+
+`<crop>` - container for crop type elements. Each child element represents a crop type with the following attributes:
+
+[%autowidth]
+|===
+| Attribute | Type | Required | Description
+
+| `seed` | double | no | liters of seed required per square meter
+| `yield` | positiveDouble | yes | liters of yield per square meter
+| `windrow` | positiveDouble | no | liters of straw per square meter
+|===
+
+`<price>` - price list with crop/goods names as attributes and price per 1000 liter as integer values. Negative values indicate a price that is not shown in the game's price table.
+
+`<factory>` - container for factory elements, each with attributes:
+
+|===
+| Attribute | Type | Required | Description |
+
+| `price` | positiveInteger | yes | purchase price of the factory |
+| `variant` | string | no |  (e.g. equipment brand/model) |
+|===
+
+Each `<factory>` contains recipe elements (named by the recipe, e.g. `<bakery>`). Each recipe has attributes:
+
+|===
+| Attribute | Type | Required | Description |
+
+| `cost` | positiveInteger | yes | running cost per hour |
+| `cycle` | positiveInteger | yes | production cycle time in hours |
+|===
+
+Each recipe contains `<in>` and `<out>` elements with material names as attribute name and liters per cycle as values.
+
+Example::
+```xml
+<fs>
+   <crop>
+      <barley seed="0.265" yield="9.6" windrow="36.8"/>
+      ...
+   </crop>
+   <price wheat="337" water="-100" .../>
+   <factory price="150000">
+      <bakery>
+         <bread cost="2.5" cycle="5" profit="0.19">
+            <in flour="90" egg="3"/>
+            <out bread="45"/>
+         </bread>
+      </bakery>
+      ...
+   </factory>
+</fs>
+```
+
+TODO::
+
+- [ ] Create a self containing coursier variant, that can be downloaded from fstools.uk.
+- [ ] Verify logging
+- [ ] File format could be taken from the out file extension
+
+To check::
+- Custom game maps
+
+Future improvements::
+- Option to add xsl as parameter, that is applied to the generated xml
+- option to extract the XSD so users can create their own xsl
+- option to set skipped items now hardcoded
 
 Run::
 `mill run {params}`
@@ -15,14 +191,14 @@ name::
 price:: per m3
 showOnPriceTable:: Price visible in the game
 
-=== fruits.csv
+=== crops.csv
 name::
 seedUsage:: required seed m3 / ha
 harvest:: harvested m3 / ha
 windrow:: straw m3 / ha
 income:: per ha
 
-=== productions.csv
+=== factories.csv
 name::
 production cycle / day::
 running cost / day::
@@ -51,3 +227,5 @@ extras:: Extra information like :
 | front loader |
 | articulating |
 |===
+
+`mill --bsp-install`

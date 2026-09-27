@@ -1,0 +1,79 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"properties": {
+		"crop": {
+			"description": "crop -> crop info map",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"seed": {
+						"type": "number",
+						"description": "seed required m3/ha"
+					},
+					"yield": {
+						"type": "number",
+						"description": "yield m3/ha"
+					},
+					"windrow": {
+						"type": "number",
+						"description": "windrow generated m3/ha"
+					}
+				},
+				"required": ["yield"]
+			}
+		},
+		"price": {
+			"description": "fill -> price map",
+			"additionalProperties": {
+				"type": "integer",
+				"description": "price / m3 (1000 liter). negative value marks price not shown in the price list"
+			}
+		},
+		"factory": {
+			"description": "factory name -> info map",
+			"additionalProperties": {
+				"properties": {
+					"price": {
+						"type": "integer"
+					},
+					"variant": {
+						"type": "string"
+					},
+					"recipe": {
+						"description": "recipeid -> info map",
+						"additionalProperties": {
+							"properties": {
+								"cycle": {
+									"description": "cycles per day",
+									"type": "integer"
+								},
+								"cost": {
+									"description": "running cost per day",
+									"type": "integer"
+								},
+								"profit": {
+									"description": "ratio: profit / cost (inputs price + running cost / day)",
+									"type": "number"
+								},
+								"in": {
+									"additionalProperties": {
+										"description": "element name is the name of the material used, the value the liter used per cycle",
+										"type": "integer"
+									}
+								},
+								"out": {
+									"additionalProperties": {
+										"description": "element name is the name of the material create. The cal hte liter created per cycle",
+										"type": "integer"
+									}
+								},
+								"required": ["cycle", "cost", "in", "out", "profit"]
+							}
+						}
+					}
+				},
+				"required": ["price", "recipe"]
+			}
+		}
+	}
+}
